@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>سپروائزر ڈیٹا سبمیشن فارم — SM Islamic Research Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="univ-data.js" onerror="window.__NO_DATA=1"></script>
+<style>
+  @font-face{font-family:'JNN';font-weight:100 900;
+    src:local('Jameel Noori Nastaleeq'),local('JameelNooriNastaleeq'),local('Jameel Noori Nastaleeq Regular'),local('Jameel Noori Nastaleeq Kasheeda');
+    unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF,U+200C-200F}
+  :root{
+    --paper:#f6f2e9; --panel:#fffdf8; --ink:#241f17; --ink2:#5a5142; --ink3:#8c8271;
+    --border:#e4dac2; --teal:#0f5c52; --teal-d:#0b463f; --tealbg:rgba(15,92,82,.07);
+    --brass:#a9762f; --brassbg:rgba(169,118,47,.08); --red:#a3312a;
+    --uf:'JNN','Noto Nastaliq Urdu',serif; --hf:'Lora','JNN',serif; --sf:'Inter','JNN',-apple-system,'Segoe UI',sans-serif;
+    --sh:0 1px 2px rgba(36,31,23,.05); --shl:0 8px 30px rgba(36,31,23,.09);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:var(--uf);min-height:100vh;line-height:1.7;
+    background-image:radial-gradient(circle at 15% 8%,rgba(15,92,82,.05),transparent 45%),radial-gradient(circle at 90% 90%,rgba(169,118,47,.06),transparent 40%);}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+  header.top{margin-bottom:26px}
+  .banner{position:relative;overflow:hidden;text-align:center;padding:30px 20px 26px;border-radius:16px;color:var(--teal-d);
+    background:linear-gradient(180deg,#fffdf8 0%,#f6efdc 100%);box-shadow:var(--shl);
+    border:1px solid var(--border);border-top:5px solid var(--teal);border-bottom:3px solid var(--brass)}
+  .banner::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 8% 12%,rgba(15,92,82,.08),transparent 40%),radial-gradient(circle at 94% 92%,rgba(169,118,47,.14),transparent 44%)}
+  .banner>*{position:relative}
+  .mark{position:relative;display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;margin-bottom:12px;
+    background:linear-gradient(135deg,#ecd29b 0%,#a9762f 52%,#e6c689 100%);
+    clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px)}
+  .mark::before{content:"";position:absolute;inset:3px;background:linear-gradient(145deg,#12705f,#0b463f);
+    clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}
+  .mark span{position:relative;font-family:var(--hf);font-weight:700;font-size:24px;letter-spacing:.06em;color:#f6dfae;line-height:1}
+  .brand-name{font-family:var(--hf);font-weight:700;font-size:clamp(30px,6vw,50px);line-height:1.12;letter-spacing:.015em;color:var(--teal-d)}
+  .brand-ur{font-family:var(--uf);font-size:clamp(18px,3.4vw,25px);color:#85571a;margin-top:8px;line-height:1.9}
+  .brand-rule{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px auto 0;max-width:260px;color:var(--brass);font-size:11px}
+  .brand-rule::before,.brand-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--brass))}
+  .brand-rule::after{transform:scaleX(-1)}
+  .cnt{font-family:var(--sf);font-weight:700;color:var(--brass)}
+  .imp-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .carry-msg{font-family:var(--sf);font-size:12.5px;color:var(--teal-d);margin-top:10px;display:none}
+  .carry-msg button{font-family:var(--sf);font-size:12px;background:none;border:none;color:var(--red);cursor:pointer;text-decoration:underline}
+  .mng-btn{font-family:var(--sf);font-size:11.5px;font-weight:600;background:none;border:none;color:var(--teal);cursor:pointer;text-decoration:underline;margin-inline-start:8px;padding:0}
+  .mng-ov{display:none;position:fixed;inset:0;background:rgba(20,16,10,.5);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .mng-ov.open{display:flex}
+  .mng{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shl);width:100%;max-width:660px;max-height:84vh;display:flex;flex-direction:column;padding:18px}
+  .mng-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .mng-h b{font-size:17px;color:var(--teal-d)}
+  .mng-h button{font-family:var(--sf);font-size:13px;background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;cursor:pointer;color:var(--ink2)}
+  .mng-list{overflow:auto;margin-top:10px;border-top:1px solid var(--border)}
+  .mng-item{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--border)}
+  .mng-item .nm{flex:1;font-size:14px;line-height:1.8}
+  .mng-item button{font-family:var(--sf);font-size:12px;border:1px solid var(--border);background:var(--paper);border-radius:6px;padding:5px 10px;cursor:pointer;color:var(--ink2);white-space:nowrap}
+  .mng-item button.del{color:var(--red)}
+  .mng-item button.ok{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .adm-ov{z-index:40}
+  #admMain{overflow:auto}
+  .adm-sec{border-top:1px solid var(--border);padding:12px 0}
+  .adm-sec h4{font-family:var(--uf);font-size:15px;color:var(--teal-d);margin-bottom:6px}
+  .adm-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .adm-btn{font-family:var(--sf);font-size:12.5px;font-weight:600;border:1.5px solid var(--teal);background:var(--tealbg);color:var(--teal-d);border-radius:8px;padding:8px 14px;cursor:pointer}
+  .adm-btn:hover{background:var(--teal);color:#fff}
+  .adm-btn.danger{color:var(--red);border-color:var(--red);background:none}
+  .adm-btn.danger:hover{background:var(--red);color:#fff}
+  .adm-in{flex:1;min-width:160px;background:var(--paper);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:var(--sf);font-size:14px;color:var(--ink);outline:none}
+  .adm-in:focus{border-color:var(--teal);background:#fff}
+  .adm-msg{font-family:var(--sf);font-size:12.5px;color:var(--teal-d);margin-top:10px;line-height:1.8}
+  .sub-note{font-family:var(--uf);font-size:13.5px;line-height:2;color:var(--ink);background:var(--brassbg);border:1px solid var(--brass);border-right:4px solid var(--brass);border-radius:10px;padding:10px 16px;text-align:right;width:100%;max-width:760px}
+  .sub-note b{color:#85571a}
+  .mail-help{margin:22px auto 0;max-width:640px;font-family:var(--sf);font-size:13px;line-height:2;color:var(--ink2);background:var(--paper);border:1px dashed var(--border);border-radius:10px;padding:12px 16px}
+  .mail-addr{margin:6px 0;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .mail-addr span{font-weight:700;font-size:15px;color:var(--teal-d);background:var(--tealbg);padding:6px 12px;border-radius:6px;user-select:all}
+  .mail-addr button{font-family:var(--sf);font-size:12px;border:1px solid var(--border);background:var(--paper);border-radius:6px;padding:6px 12px;cursor:pointer;color:var(--ink2)}
+  .site-foot{margin-top:34px;text-align:center;font-family:var(--sf);font-size:13px;line-height:1.95;color:var(--ink2)}
+  .foot-line{height:1px;border:0;max-width:560px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,var(--brass),transparent)}
+  .foot-name{font-family:var(--hf);font-size:19px;font-weight:700;color:var(--teal-d);letter-spacing:.01em}
+  .site-foot a{color:var(--teal-d);text-decoration:none;border-bottom:1px dotted var(--brass)}
+  .form-title-wrap{text-align:center;padding:24px 0 6px}
+  h1{font-family:var(--uf);font-size:25px;font-weight:700;margin:0 0 2px;color:var(--teal-d)}
+  h1 .en{display:block;font-family:var(--hf);font-style:italic;font-size:14.5px;color:var(--ink3);font-weight:500;margin-top:2px;letter-spacing:.02em}
+  .lede{font-size:14.5px;color:var(--ink2);max-width:600px;margin:8px auto 0}
+  .card{transition:box-shadow .15s}
+  .card:focus-within{box-shadow:0 4px 18px rgba(15,92,82,.10)}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--sh);padding:22px 22px 24px;margin-bottom:18px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+  .sec-h .num{font-family:var(--hf);font-style:italic;color:var(--brass);font-size:14px;flex-shrink:0}
+  .sec-h .t{font-size:17px;font-weight:700;color:var(--teal-d)}
+  .sec-h .t small{display:block;font-family:var(--sf);font-size:10.5px;font-weight:500;letter-spacing:.03em;color:var(--ink3);margin-top:2px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+  .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .fld:last-child{margin-bottom:0}
+  .fld label{font-size:12.5px;font-family:var(--sf);font-weight:600;color:var(--ink2)}
+  .fld label .req{color:var(--red)}
+  .fld label .opt{font-weight:400;color:var(--ink3)}
+  select,input[type=text]{
+    width:100%;background:var(--paper);border:1.5px solid var(--border);border-radius:8px;
+    padding:10px 12px;font-family:var(--uf);font-size:15px;color:var(--ink);outline:none;
+    transition:border-color .12s,background .12s;
+  }
+  select:disabled{opacity:.5;cursor:not-allowed}
+  select:focus,input[type=text]:focus{border-color:var(--teal);background:#fff}
+  select{cursor:pointer;font-family:var(--sf);font-size:13.5px}
+  .hint{font-size:11.5px;color:var(--ink3);font-family:var(--sf)}
+
+  table.stbl{width:100%;border-collapse:collapse;font-size:14px}
+  table.stbl th{font-family:var(--sf);font-size:10.5px;font-weight:600;color:var(--ink3);text-align:right;padding:0 8px 8px;border-bottom:1.5px solid var(--border)}
+  table.stbl th.c{text-align:center}
+  table.stbl td{padding:6px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
+  table.stbl tr:last-child td{border-bottom:none}
+  .rownum{font-family:var(--sf);font-size:12px;color:var(--ink3);text-align:center;padding-top:12px!important;width:24px}
+  .yr-cell{width:132px}
+  .yr-prev{font-family:var(--sf);font-size:10.5px;color:var(--teal);margin-top:4px;min-height:13px;direction:ltr;text-align:left}
+  .yr-prev.bad{color:var(--red)}
+  .rm-cell{width:34px;text-align:center}
+  .rm-btn{background:none;border:none;color:var(--ink3);font-size:15px;cursor:pointer;padding:8px 4px;border-radius:6px;transition:.12s}
+  .rm-btn:hover{color:var(--red);background:rgba(163,49,42,.08)}
+  .add-row{margin-top:14px;background:var(--tealbg);border:1.5px dashed var(--teal);color:var(--teal-d);
+    font-family:var(--sf);font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;width:100%;transition:.12s}
+  .add-row:hover{background:var(--teal);color:#fff}
+
+  .submit-row{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:4px}
+  .submit-btn{font-family:var(--sf);font-size:15px;font-weight:700;letter-spacing:.01em;background:var(--teal);color:#fff;
+    border:none;border-radius:9px;padding:14px 34px;cursor:pointer;box-shadow:var(--shl);transition:transform .12s,background .12s}
+  .submit-btn:hover{background:var(--teal-d);transform:translateY(-1px)}
+  .submit-btn:disabled{opacity:.55;cursor:wait;transform:none}
+  .foot-note{font-family:var(--sf);font-size:11.5px;color:var(--ink3);text-align:center;max-width:420px}
+
+  .banner{border:1.5px solid var(--red);background:rgba(163,49,42,.06);color:var(--red);border-radius:10px;
+    padding:12px 16px;font-family:var(--sf);font-size:12.5px;margin-bottom:18px;line-height:1.6}
+  .banner b{display:block;font-size:13px;margin-bottom:3px}
+  .err-msg{font-family:var(--sf);font-size:12px;color:var(--red);margin-top:8px;display:none}
+
+  #successView{display:none;text-align:center;padding:40px 20px}
+  #successView .ic{font-size:44px;margin-bottom:14px}
+  #successView h2{font-family:var(--uf);font-size:22px;color:var(--teal-d);margin-bottom:8px}
+  #successView p{font-family:var(--sf);font-size:13.5px;color:var(--ink2);max-width:380px;margin:0 auto 22px}
+  #successView button{font-family:var(--sf);font-size:13px;font-weight:600;background:none;border:1.5px solid var(--teal);
+    color:var(--teal-d);padding:9px 20px;border-radius:8px;cursor:pointer}
+  #successView button:hover{background:var(--tealbg)}
+
+  #formShell.hidden,.hidden{display:none!important}
+  input[type=text]::placeholder{color:var(--ink3);opacity:.65}
+
+  .tbl-wrap{overflow-x:auto}
+  table.stbl{min-width:1040px}
+  table.stbl input[type=text],table.stbl select{height:46px;padding:0 10px;font-size:14px;line-height:1.4;width:100%}
+  table.stbl .rownum,table.stbl .ro{height:46px;padding-top:0!important;line-height:46px;vertical-align:top}
+  table.stbl .ro{line-height:1.7;display:table-cell;padding-top:9px!important}
+  table.stbl .rm-btn{height:46px;padding:0 6px}
+  .ro{font-size:12.5px;color:var(--ink2);line-height:1.6;padding-top:12px!important}
+  .deg-cell{width:118px}
+  .newsup{margin-top:6px}
+  .hidden-inline{display:none}
+  .ctxmsg{font-family:var(--sf);font-size:12px;color:var(--brass);margin-bottom:10px}
+  @media(max-width:900px){
+    table.stbl{min-width:0}
+    table.stbl thead{display:none}
+    table.stbl tbody tr{display:block;border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:12px;background:var(--paper)}
+    table.stbl td{display:block;border:none!important;padding:4px 0;width:auto!important}
+    table.stbl td[data-l]::before{content:attr(data-l);display:block;font-family:var(--sf);font-size:11px;color:var(--ink3);margin-bottom:2px}
+    .ro{padding-top:4px!important;height:auto!important}table.stbl .rownum{height:auto;line-height:1.7}.rownum{text-align:right}table.stbl .rm-btn{height:auto;padding:6px}.rm-cell{text-align:left}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="banner">
+      <div class="mark"><span>SM</span></div>
+      <div class="brand-name">Islamic Research Index</div>
+      <div class="brand-ur">اسلامک ریسرچ انڈیکس</div>
+      <div class="brand-rule">◆</div>
+    </div>
+    <div class="form-title-wrap">
+      <h1>سپروائزر ڈیٹا فارم (ڈاؤن لوڈ / ای میل)<span class="en">Supervisor Data Form — Download &amp; Email</span></h1>
+      <p class="lede">پہلے یونیورسٹی اور شعبہ منتخب کریں، پھر جدول میں ہر سکالر کی مکمل تفصیل (عنوان، سپروائزر، ڈگری، سال) درج کریں۔ آخر میں ایک فائل خودکار طور پر محفوظ ہو جائے گی — وہی فائل ای میل کے ساتھ منسلک کر کے بھیج دیں۔</p>
+    </div>
+  </header>
+
+  <div id="formShell">
+    <form id="supForm" novalidate>
+
+      <div class="card">
+        <div class="sec-h"><span class="num">۱</span><span class="t">یونیورسٹی اور شعبہ<small>University &amp; Department</small></span></div>
+        <div class="grid2">
+          <div class="fld">
+            <label>یونیورسٹی <span class="cnt" id="univCnt" dir="ltr"></span> <span class="req">*</span></label>
+            <select id="fUniv" required><option value="">— منتخب کریں —</option></select>
+            <input type="text" id="fUnivNew" class="hidden-inline" placeholder="نئی یونیورسٹی کا پورا نام لکھیں" autocomplete="off">
+          </div>
+          <div class="fld">
+            <label>شعبہ / ڈیپارٹمنٹ <span class="req">*</span></label>
+            <select id="fDept" required disabled><option value="">پہلے یونیورسٹی منتخب کریں</option></select>
+            <input type="text" id="fDeptNew" class="hidden-inline" placeholder="نئے شعبے کا نام لکھیں" autocomplete="off">
+            <span class="hint">اگر شعبہ فہرست میں نہ ہو تو آخری آپشن "نیا شعبہ" منتخب کر کے خود لکھ دیں۔</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec-h"><span class="num">۲</span><span class="t">اندراجات<small>Entries — Scholar · Title · Supervisor · Department · University · Degree · Year</small></span></div>
+        <div id="ctxMsg" class="ctxmsg">⚠ سپروائزر اور ڈگری منتخب کرنے کے لیے پہلے اوپر یونیورسٹی اور شعبہ منتخب کریں۔</div>
+
+        <div class="tbl-wrap">
+        <table class="stbl">
+          <thead><tr>
+            <th class="c">#</th>
+            <th>سکالر کا نام</th>
+            <th>مقالے کا عنوان</th>
+            <th>سپروائزر</th>
+            <th>شعبہ</th>
+            <th>یونیورسٹی</th>
+            <th>ڈگری</th>
+            <th>سال</th>
+            <th></th>
+          </tr></thead>
+          <tbody id="rowsBody"></tbody>
+        </table>
+        </div>
+
+        <div class="imp-row"><button type="button" class="add-row" id="addRowBtn">➕ سکالر شامل کریں</button></div>
+        <div id="carryMsg" class="carry-msg"></div>
+        <div class="hint" style="margin-top:8px">سپروائزر کی فہرست میں نام نہ ہو تو "نیا سپروائزر" منتخب کر کے لکھیں — نام خود بخود معیاری شکل میں بدل جائے گا۔ سال <span dir="ltr">2018-2022</span>، <span dir="ltr">2018 - 2022</span> یا صرف <span dir="ltr">2020</span> — جیسے بھی لکھیں، فارم درست شکل بنا دے گا۔</div>
+      </div>
+
+      <div class="submit-row">
+        <div class="sub-note"><b>⚠ اہم اطلاع:</b> مقالہ جات کے ڈیٹا کی درستگی اور تصدیق کو یقینی بنانے کے لیے ڈیٹا صرف متعلقہ نگرانِ مقالہ (Supervisor) کی جانب سے ارسال کیا جائے۔ ڈیٹا نگرانِ مقالہ کے <b>سرکاری جامعاتی/ادارہ جاتی ای میل ایڈریس</b> سے ہی قابلِ قبول ہوگا۔ طلبہ کی جانب سے یا غیر سرکاری/ذاتی ای میل سے موصول ہونے والا ڈیٹا قبول نہیں کیا جائے گا۔</div>
+        <div id="formErr" class="err-msg"></div>
+        <button type="submit" class="submit-btn" id="submitBtn">💾 فائل تیار کریں / Download</button>
+        <div class="foot-note">بٹن دبانے پر ایک فائل ڈاؤن لوڈ ہوگی — اگلے مرحلے میں وہی فائل ای میل سے بھیجنے کی ہدایت ملے گی۔</div>
+      </div>
+    </form>
+  </div>
+  <div id="successView">
+    <div class="ic">✅</div>
+    <h2>فائل تیار ہو کر ڈاؤن لوڈ ہو گئی</h2>
+    <p id="fnameMsg" style="font-family:var(--sf);direction:ltr;font-size:12.5px;background:var(--tealbg);color:var(--teal-d);border-radius:6px;padding:8px 12px;display:inline-block"></p>
+    <div class="sub-note" style="margin:18px auto 0"><b>⚠ اہم اطلاع:</b> مقالہ جات کے ڈیٹا کی درستگی اور تصدیق کو یقینی بنانے کے لیے ڈیٹا صرف متعلقہ نگرانِ مقالہ (Supervisor) کی جانب سے ارسال کیا جائے۔ ڈیٹا نگرانِ مقالہ کے <b>سرکاری جامعاتی/ادارہ جاتی ای میل ایڈریس</b> سے ہی قابلِ قبول ہوگا۔ طلبہ کی جانب سے یا غیر سرکاری/ذاتی ای میل سے موصول ہونے والا ڈیٹا قبول نہیں کیا جائے گا۔</div>
+    <div style="text-align:right;background:var(--paper);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin:18px 0;font-family:var(--sf);font-size:13px;color:var(--ink2);line-height:2">
+      اب صرف یہ 2 آسان قدم باقی ہیں:<br>
+      <b>۱.</b> ابھی ڈاؤن لوڈ ہونے والی فائل اپنے فون یا کمپیوٹر کے "Downloads" فولڈر میں تلاش کریں۔<br>
+      <b>۲.</b> نیچے دیا ہوا "ای میل بھیجیں" بٹن دبائیں، اور کھلنے والی ای میل میں وہی فائل بطور Attachment لگا کر Send کر دیں۔
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a id="mailBtn" href="#" style="font-family:var(--sf);font-size:13px;font-weight:700;background:var(--teal);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;display:inline-block">📧 ای میل بھیجیں</a>
+      <button type="button" id="againBtn">➕ نیا اندراج کریں</button>
+    </div>
+    <div class="mail-help">
+      <div>اگر "ای میل بھیجیں" سے ای میل نہ کھلے، تو ڈاؤن لوڈ شدہ فائل کو اپنے <b>سرکاری جامعاتی/ادارہ جاتی ای میل</b> سے درج ذیل ایڈریس پر بھیجیں:</div>
+      <div class="mail-addr"><span id="mailAddr" dir="ltr"></span> <button type="button" id="copyMail">📋 کاپی</button></div>
+    </div>
+  </div>
+
+
+  <div class="mng-ov adm-ov" id="admOv"><div class="mng">
+    <div class="mng-h"><b>🔒 Admin Settings</b><button type="button" id="admClose">✕ بند کریں</button></div>
+    <div id="admGate">
+      <p class="hint" style="margin-bottom:8px">Administrator پاس ورڈ درج کریں</p>
+      <div style="display:flex;gap:8px"><input type="password" id="admPw" class="adm-in" autocomplete="off"><button type="button" class="adm-btn" id="admGo">کھولیں</button></div>
+      <div id="admErr" class="err-msg" style="display:none;margin-top:8px"></div>
+    </div>
+    <div id="admMain" class="hidden-inline">
+      <div class="adm-sec"><h4>ڈیٹا بیس فائلوں سے Extract</h4>
+        <p class="hint"><b>طریقہ:</b> ۱) "Extract" دبا کر اپنی تمام DB/JSON فائلیں ایک ساتھ منتخب کریں — ان میں سے صرف یونیورسٹی، شعبہ اور سپروائزر نکل کر ایک فہرست بن جاتی ہے۔ ۲) "univ-data.js ڈاؤن لوڈ" دبائیں۔ ۳) یہ فائل فارم کی HTML کے ساتھ اسی فولڈر (GitHub) میں رکھ دیں — فارم اسے خود اٹھا لیتا ہے۔ تھیسس کا باقی ڈیٹا (عنوان، سکالر وغیرہ) کہیں محفوظ نہیں ہوتا۔</p>
+        <div class="adm-grid">
+          <button type="button" class="adm-btn" id="admExtract">⛏ Extract (کئی فائلیں)</button>
+          <button type="button" class="adm-btn" id="admExport">📥 univ-data.js ڈاؤن لوڈ</button>
+          <button type="button" class="adm-btn" id="admDb">📂 تیار فائل اپ لوڈ / Replace</button>
+          <button type="button" class="adm-btn danger" id="admDbDel">🗑 اپ لوڈ شدہ فائل حذف کریں</button>
+        </div>
+        <input type="file" id="admFiles" multiple accept=".db,.sqlite,.sqlite3,.json,.js,.txt,application/json,application/x-sqlite3" class="hidden-inline">
+        <input type="file" id="admFile" accept=".db,.sqlite,.sqlite3,.json,.js,.txt,application/json,application/x-sqlite3" class="hidden-inline">
+        <div id="admStatus" class="adm-msg" style="font-weight:600"></div>
+        <div id="admMsg" class="adm-msg"></div>
+      </div>
+      <div class="adm-sec"><h4>ڈیٹا بیس کا انتظام</h4>
+        <div class="adm-grid">
+          <button type="button" class="adm-btn" id="admMng">✏️ یونیورسٹیاں Edit / Delete</button>
+          <button type="button" class="adm-btn" id="importBtn">📂 اندراجات (Records) اپ لوڈ</button>
+        </div>
+        <input type="file" id="importFile" accept=".json,application/json" class="hidden-inline">
+        <p class="hint" style="margin-top:8px">یہ تبدیلیاں اسی براؤزر میں محفوظ ہوتی ہیں۔ آن لائن پروگرام کے تمام صارفین کو نئی فہرستیں دینے کے لیے "univ-data.js" ڈاؤن لوڈ کر کے اسے پروگرام کی HTML فائل کے ساتھ اسی فولڈر میں اپ لوڈ کر دیں۔</p>
+      </div>
+      <div class="adm-sec"><h4>سیکیورٹی</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="admNewPw" class="adm-in" placeholder="نیا پاس ورڈ (کم از کم 6 حروف)" autocomplete="off"><button type="button" class="adm-btn" id="admChPw">پاس ورڈ تبدیل کریں</button></div>
+        <div style="margin-top:10px"><button type="button" class="adm-btn" id="admReset" style="color:var(--red);border-color:var(--red);background:none">⟲ اس براؤزر کی تمام تبدیلیاں صاف کریں</button></div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="mng-ov" id="mngOv"><div class="mng">
+    <div class="mng-h"><b>یونیورسٹیاں — Edit / Delete <span class="cnt" id="mngCnt" dir="ltr"></span></b><button type="button" id="mngClose">✕ بند کریں</button></div>
+    <input type="text" id="mngSearch" placeholder="یونیورسٹی تلاش کریں…" autocomplete="off">
+    <div class="mng-list" id="mngList"></div>
+  </div></div>
+
+  <footer class="site-foot" dir="ltr">
+    <hr class="foot-line">
+    <div class="foot-name">Dr. Sajid Mahmood</div>
+    <div>Department of Islamic &amp; Religious Studies</div>
+    <div>Hazara University, Mansehra</div>
+    <div>Email: <a href="mailto:sajidzbi@gmail.com">sajidzbi@gmail.com</a></div>
+    <div>Mobile/WhatsApp: <a href="tel:03009080730">0300-9080730</a></div>
+  </footer>
+</div>
+
+<script>
+var ADMIN_EMAIL = "smislamicresearchindex@gmail.com";
+var OLD = (window.UNIV_DATA && Object.keys(window.UNIV_DATA).length) ? window.UNIV_DATA : null;
+var EMB = {};
+/* ہلکا Data: صرف یونیورسٹی → شعبہ → سپروائزر کے روابط (کوئی تھیسس ریکارڈ، عنوان یا سکالر نہیں) */
+var EMBD = {"اسلامیہ کالج، پشاور":{"depts":["شعبہ اسلامک تھیالوجی"],"supervisors":{"شعبہ اسلامک تھیالوجی":["ڈاکٹر حسین فاروق","ڈاکٹر محمد ریاض خان الازہری"]}},"اسلامیہ یونیورسٹی، بہاولپور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["حافظ عثمان غنی","سید اسرار حسین بخاری","ڈاکٹر ابرار محی الدین مرزا","ڈاکٹر الطاف حسین لنگڑیال","ڈاکٹر حافظ افتخار احمد","ڈاکٹر حافظ ضیاء الرحمن","ڈاکٹر حافظ محمد نصر اللہ","ڈاکٹر سجیلہ کوثر","ڈاکٹر شمس البصر","ڈاکٹر عبد الرؤوف ظفر","ڈاکٹر عبد الرشید رحمت","ڈاکٹر عبد الغفار","ڈاکٹر قاری ابو الحسن شبیر احمد","ڈاکٹر محمد حبیب","ڈاکٹر محمد عمران*","ڈاکٹر محمد منیر اظہر","ڈاکٹر محمود احمد عبد اللہ","ڈاکٹر منیر احمد*"]}},"اصلاح انٹر نیشنل لاہور؛ الحاق : یونیورسٹی آف سرگودھا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر غلام علی خان","ڈاکٹر محمد فیروز الدین شاہ کھگہ","ڈاکٹر ممتاز احمد سالک"]}},"الحمد اسلامک یونیورسٹی، کوئٹہ کیمپس":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر شبیر احمد","ڈاکٹر صاحبزادہ باز محمد"]}},"امپیریل کالج آف بزنس سٹڈیز، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر محمد کریم خان"]}},"انسٹی ٹیوٹ آف سدرن پنجاب، ملتان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["سید افتخار علی گیلانی","ڈاکٹر محمد صدیق سیالوی","ڈاکٹر مقبول حسن گیلانی"]}},"انٹرنیشنل اسلامک یونیورسٹی، اسلام آباد":{"depts":["ادارہ تحقیقاتِ اسلامی","تقابل ادیان"],"supervisors":{"ادارہ تحقیقاتِ اسلامی":["ڈاکٹر حافظ آفتاب احمد","ڈاکٹر حافظ محمد سجاد","ڈاکٹر محمد منیر"]}},"انڈس انٹر نیشنل انسٹی ٹیوٹ، ڈیرہ غازی خان؛ الحاق : جی سی یونیورسٹی، فیصل آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر عمر حیات انصاری","ڈاکٹر محمد حامد رضا","ڈاکٹر یاسر عرفات"]}},"بہاء الدین زکریا یونیورسٹی، ملتان":{"depts":["علوم اسلامیہ"],"supervisors":{"*":["ڈاکٹر عبد القدوس صہیب","ڈاکٹر فریدہ یوسف"],"علوم اسلامیہ":["محمود سلطان کھوکھر","نور الدین جامی","ڈاکٹر الطاف حسین لنگڑیال","ڈاکٹر جمیل احمد نتکانی","ڈاکٹر عبد القدوس صہیب","ڈاکٹر علی اصغر سلیمی","ڈاکٹر غلام شمس الرحمن","ڈاکٹر فریدہ یوسف","ڈاکٹر محمد ادریس لودھی","ڈاکٹر محمد امجد","ڈاکٹر محمد اکرم رانا","ڈاکٹر محمد باقر خان خاکوانی","ڈاکٹر محمود سلطان کھوکھر","ڈاکٹر مفتی سعید الرحمن","ڈاکٹر منزہ حیات","ڈاکٹر نور الدین جامی"]}},"جامعہ ملیہ اسلامیہ، جامعہ نگر، نئی دہلی، انڈیا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر اختر الواسع","ڈاکٹر فریدہ خانم"]}},"جی سی ویمن یونیورسٹی، سیالکوٹ":{"depts":["ادارہ عربی و علوم اسلامیہ"],"supervisors":{"ادارہ عربی و علوم اسلامیہ":["ڈاکٹر محمد ارشد**"]}},"جی سی ویمن یونیورسٹی، فیصل آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["اسماء عزیز","شازیہ عدنان","شمیم وریام","ڈاکٹر عابدہ حیات","ڈاکٹر عمرانہ شہزادی","ڈاکٹر نجم بانو"]}},"جی سی یونیورسٹی، فیصل آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["علی اصغر شاہد","عمر حیات انصاری","قاری ڈاکٹر محمد طاہر","مسز طلعت صفدر","ڈاکٹر ارشد منیر لغاری","ڈاکٹر حافظ حامد حماد","ڈاکٹر رانا مطلوب احمد","ڈاکٹر شیر علی*","ڈاکٹر عبد الرشید قادری","ڈاکٹر علی اصغر شاہد","ڈاکٹر عمر حیات انصاری","ڈاکٹر غلام شمس الرحمن","ڈاکٹر محفوظ احمد","ڈاکٹر محمد اسحاق قریشی","ڈاکٹر محمد حامد رضا","ڈاکٹر محمد ہمایوں عباس شمس","ڈاکٹر محمود احمد عبد اللہ","ڈاکٹر مدثر احمد","ڈاکٹر نوید احمد شہزاد"]}},"جی سی یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["حافظ سفارش علی","عظمیٰ صفت","محمد قاسم بٹ","ڈاکٹر امتیاز احمد **","ڈاکٹر حافظ خورشید احمد قادری","ڈاکٹر حافظ محمد نعیم","ڈاکٹر سید محمد سلطان شاہ","ڈاکٹر محمد سرفراز خالد","ڈاکٹر محمد عابد ندیم","ڈاکٹر محمد فاروق حیدر","ڈاکٹر محمد قاسم بٹ","ڈاکٹر محمد نعیم انور الازہری","ڈاکٹر نائلہ صفدر"]}},"خواجہ فرید یونیورسٹی آف انجینئرنگ اینڈ انفارمیشن ٹیکنالوجی، رحیم یار خان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر شاہد حبیب"]}},"دی ویمن یونیورسٹی، ملتان":{"depts":["علوم اسلامیہ و تقابل ادیان"],"supervisors":{"علوم اسلامیہ و تقابل ادیان":["رقیہ بانو","شہلا مظفر","صبیحہ عبد القدوس","فرخندہ اکرام","مس سمیرا صفدر","ڈاکٹر شاہانہ تبسم","ڈاکٹر قدسیہ خاکوانی","ڈاکٹر کلثوم پراچہ"]}},"دی یونیورسٹی آف فیصل آباد، فیصل آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["اسماء طارق","ناہید کوثر","ڈاکٹر حمیرا خلیل","ڈاکٹر ظہور احمد اظہر","ڈاکٹر عمارہ رحمن","ڈاکٹر محفوظ احمد","ڈاکٹر محمد رمضان نجم باروی","ڈاکٹر ممتاز احمد سدیدی"]}},"دی یونیورسٹی آف لاہور، سرگودھا کیمپس":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ محمد حسین","ڈاکٹر محمد طارق رمضان","ڈاکٹر نبیلہ فلک"]}},"دی یونیورسٹی آف لاہور، لاہور کیمپس":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ انس نضر","ڈاکٹر حافظ محمد اشرف","ڈاکٹر حافظ محمد حسین","ڈاکٹر ذوہیب احمد","ڈاکٹر شہزادہ عمران ایوب","ڈاکٹر ظہور اللہ الازہری","ڈاکٹر عبد الرشید قادری","ڈاکٹر علی اکبر الازہری","ڈاکٹر محفوظ احمد","ڈاکٹر محمد امین*","ڈاکٹر محمد نواز الحسنی","ڈاکٹر نصیر اختر"]}},"رفاہ انٹر نیشنل یونیورسٹی، اسلام آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر انعام الحق"]}},"رفاہ انٹرنیشنل یونیورسٹی، فیصل آباد کیمپس":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["حافظ عبد الرحمن","قاری ڈاکٹر محمد طاہر","محمد نعیم مبشر","ڈاکٹر اشتیاق احمد گوندل","ڈاکٹر ایس ایم شریف","ڈاکٹر حافظ امجد حسین","ڈاکٹر حافظ محمد دین قاسمی","ڈاکٹر حافظ محمد شریف شاکر","ڈاکٹر حافظ مسعود قاسم","ڈاکٹر حافظ مفتی عبد الرزاق","ڈاکٹر حبیب الرحمن","ڈاکٹر ساجد اسد اللہ","ڈاکٹر عبد الرحمن مدثر","ڈاکٹر علی اصغر شاہد","ڈاکٹر محمد عمر راحیل","ڈاکٹر مدثر احمد","ڈاکٹر نوید احمد شہزاد"]}},"سردار بہادر خان ویمن یونیورسٹی، کوئٹہ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["صلاح الدین**","فرخندہ اکرام","مسز انجم ریاض","ڈاکٹر سید حیدر شاہ","ڈاکٹر غلام محمد جعفر","ڈاکٹر نوشین ظہیر","ڈاکٹر پری گل ترین"]}},"شاہ عبد اللطیف یونیورسٹی، خیر پور":{"depts":["ادارہ علوم اسلامیہ"],"supervisors":{"ادارہ علوم اسلامیہ":["ڈاکٹر زین العابدین اریجو","ڈاکٹر سجاد علی رئیسی","ڈاکٹر عبد الوحید اندھڑ","ڈاکٹر کامران حسین وٹو"]}},"شہید بے نظیر بھٹو ویمن یونیورسٹی، پشاور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر رشید احمد","ڈاکٹر نسیم اختر"]}},"شہید بے نظیر بھٹو یونیورسٹی، شرینگل":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر آفتاب احمد","ڈاکٹر سمیع الحق*"]}},"عبد الولی خان یونیورسٹی، مردان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ صالح الدین","ڈاکٹر سعید الرحمن بن نور حبیب","ڈاکٹر سہیل انور","ڈاکٹر محمد زبیر","ڈاکٹر محمد زکریا","ڈاکٹر محمد نعیم","ڈاکٹر نیاز محمد","ڈاکٹر گلزار علی"]}},"علامہ اقبال اوپن یونیورسٹی، اسلام آباد":{"depts":["شریعہ و قانون","فکر اسلامی، تاریخ و ثقافت","قرآن و تفسیر","کلیہ عربی و علوم اسلامیہ"],"supervisors":{"شریعہ و قانون":["ڈاکٹر محمد باقر خان خاکوانی","ڈاکٹر محمد ضیاء الحق"],"فکر اسلامی، تاریخ و ثقافت":["ڈاکٹر احمد رضا"],"قرآن و تفسیر":["ڈاکٹر احمد رضا","ڈاکٹر ثناء اللہ حسین","ڈاکٹر حافظ محمد ارشد اقبال","ڈاکٹر سمیع الحق**","ڈاکٹر نور حیات خان"],"کلیہ عربی و علوم اسلامیہ":["ظفر اقبال","ڈاکٹر جنید احمد ہاشمی","ڈاکٹر حافظ طاہر اسلام عسکری","ڈاکٹر حافظ غلام محمد یوسف","ڈاکٹر حافظ محمد ارشد اقبال","ڈاکٹر حافظ محمد سجاد","ڈاکٹر حافظ محمود اختر","ڈاکٹر عبد الحمید خان عباسی","ڈاکٹر عبد العلی اچکزئی","ڈاکٹر عصمت اللہ","ڈاکٹر علی اصغر چشتی","ڈاکٹر غلام محمد جعفر","ڈاکٹر محمد ادریس لودھی","ڈاکٹر محمد اسحاق قریشی","ڈاکٹر محمد اکرم ورک","ڈاکٹر محمد ہمایوں عباس شمس","ڈاکٹر محی الدین ہاشمی","ڈاکٹر معین الدین ہاشمی","ڈاکٹر ہدایت خان"]}},"علی گڑھ مسلم یونیورسٹی، علی گڑھ، اتر پردیش، انڈیا":{"depts":["دینیات"],"supervisors":{"دینیات":["ڈاکٹر احسان اللہ فہد","ڈاکٹر توقیر عالم فلاحی","ڈاکٹر عبد الخالق","ڈاکٹر محمد سعود عالم قاسمی","ڈاکٹر محمد سلیم قاسمی","ڈاکٹر مفتی زاہد علی خان","ڈاکٹر نسیم منصور"]}},"فیڈرل اردو یونیورسٹی آف آرٹس، سائنس اینڈ ٹیکنالوجی، کراچی":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ محمد ثانی","ڈاکٹر حبیب الرحمن","ڈاکٹر صلاح الدین ثانی","ڈاکٹر عبد الجبار قریشی","ڈاکٹر عبد الغفور بلوچ"]}},"قرطبہ یونیورسٹی آف سائنس اینڈ انفارمیشن ٹیکنالوجی، پشاور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر رشید احمد","ڈاکٹر مشتاق احمد"]}},"قرطبہ یونیورسٹی آف سائنس اینڈ انفارمیشن ٹیکنالوجی، ڈیرہ اسماعیل خان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر عبد الوہاب خان*","ڈاکٹر فضل الٰہی خان","ڈاکٹر منظور احمد اعوان"]}},"لاہور انسٹی ٹیوٹ فار سوشل سائنسز، لاہور؛ الحاق: یونیورسٹی آف سرگودھا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["سمعیہ اطہر","ڈاکٹر ساجد اقبال"]}},"لاہور لیڈز یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ ساجد انور","ڈاکٹر شبیر احمد منصوری","ڈاکٹر قلب بشیر خاور بٹ"]}},"لاہور کالج فار ویمن یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["شاہدہ امجد","قدسیہ بانو","مسز محمودہ خانم بھٹی","ڈاکٹر آسیہ شبیر منصوری","ڈاکٹر سلمیٰ محمود","ڈاکٹر صدف سلطان","ڈاکٹر فریحہ انجم","ڈاکٹر محسنہ منیر"]}},"لاہور گیریژن یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر سعید احمد سعیدی","ڈاکٹر محسن خان عباسی"]}},"محی الدین اسلامک یونیورسٹی، نیریاں شریف، آزاد جموں و کشمیر":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ محمد خان","ڈاکٹر حافظ محمد سلیم سعیدی","ڈاکٹر شبیر حسین"]}},"منہاج کالج فار ویمن، لاہور ؛ الحاق : منہاج یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["غلام احمد","ڈاکٹر عبد اللہ**"]}},"منہاج یونیورسٹی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["رضیہ یاسمین","سید افتخار احمد شاہ بخاری","غلام احمد","فرخ سہیل","محمد عباس نقشبندی","نور الزمان نوری","ڈاکٹر خالق داد ملک","ڈاکٹر سید محمد سلطان شاہ","ڈاکٹر شبیر احمد جامی","ڈاکٹر شفاقت علی بغدادی","ڈاکٹر صاحبزادہ محمد عتیق حیدر","ڈاکٹر ظہور اللہ الازہری","ڈاکٹر عبد الرشید قادری","ڈاکٹر علی اکبر الازہری","ڈاکٹر فرخ سہیل","ڈاکٹر فیض اللہ بغدادی","ڈاکٹر محمد الیاس اعظمی","ڈاکٹر محمد اکرم رانا","ڈاکٹر محمد تاج الدین کالامی","ڈاکٹر محمد خان ملک","ڈاکٹر محمد ممتاز الحسن باروی","ڈاکٹر مسعود احمد مجاہد","ڈاکٹر ممتاز احمد سدیدی","ڈاکٹر نبیلہ اسحاق"]}},"میر پور یونیورسٹی آف سائنس اینڈ ٹیکنالوجی، میر پور، آزاد جموں و کشمیر":{"depts":["ادارہ علوم اسلامیہ"],"supervisors":{"ادارہ علوم اسلامیہ":["مسز منزہ مصدق","ڈاکٹر اصغر علی خان","ڈاکٹر سجاد احمد","ڈاکٹر سجاد علی","ڈاکٹر طاہر اسلم"]}},"نیشنل کالج آف بزنس ایڈمنسٹریشن اینڈ اکنامکس، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["محمد مسلم","ڈاکٹر حافظ احسان الحق","ڈاکٹر عابد اکبر"]}},"نیشنل کالج آف بزنس ایڈمنسٹریشن اینڈ اکنامکس، ملتان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر مقبول حسن گیلانی"]}},"نیشنل یونیورسٹی آف ماڈرن لینگویجز، اسلام آباد":{"depts":["علوم اسلامیہ / اسلامی فکر و ثقافت"],"supervisors":{"علوم اسلامیہ / اسلامی فکر و ثقافت":["ڈاکٹر آسیہ رشید","ڈاکٹر ارم سلطانہ","ڈاکٹر حافظ راؤ فرحان علی","ڈاکٹر ریاض احمد سعید","ڈاکٹر سمیہ رفیق","ڈاکٹر سید عبد الغفار بخاری","ڈاکٹر ضیاء الحق یوسفزئی","ڈاکٹر عبد الغفار بخاری","ڈاکٹر عطاء اللہ فیضی","ڈاکٹر منزہ سلطانہ","ڈاکٹر نور حیات خان"]}},"ویمن یونیورسٹی، مردان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ثناء ضیاء","ڈاکٹر سعید الرحمن بن نور حبیب"]}},"کمانڈ کالج، ساہیوال ؛ الحاق : یونیورسٹی آف سرگودھا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["سمیعہ اطہر","ڈاکٹر ساجد اقبال","ڈاکٹر فرحت نسیم علوی","ڈاکٹر محمد شہباز منج","ڈاکٹر محمد ناصر محمود وڑائچ"]}},"گفٹ یونیورسٹی، گوجرانوالہ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["حافظ محمد عمار خان ناصر","محمد ریاض محمود","ڈاکٹر حافظ محمود اختر","ڈاکٹر محمد اکرم ورک","ڈاکٹر محمد ریاض محمود","ڈاکٹر محمد شریف چودھری","ڈاکٹر مستفیض احمد علوی"]}},"گلم (GLIM) انسٹی ٹیوٹ آف ماڈرن سٹڈیز، بہاولپور ؛ الحاق : یونیورسٹی آف سرگودھا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر محمد شہباز منج"]}},"گورنمنٹ پوسٹ گریجویٹ اسلامیہ کالج فار ویمن، کوپر روڈ، لاہور؛ الحاق : یونیورسٹی آف پنجاب، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["مسز مدثر حمید","ڈاکٹر انیلہ مبشر","ڈاکٹر حمیرا اشرف","ڈاکٹر نصرت جبین"]}},"گورنمنٹ پوسٹ گریجویٹ کالج جڑانوالہ ؛ الحاق : یونیورسٹی آف پنجاب، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ مفتی عبد الرزاق","ڈاکٹر عتیق امجد"]}},"گورنمنٹ پوسٹ گریجویٹ کالج فار ویمن، ساہیوال":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["شاہینہ عمران"]}},"گورنمنٹ پوسٹ گریجویٹ کالج، چارسدہ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر محمد ریاض"]}},"گورنمنٹ ڈگری کالج برائے خواتین نمبر 2، شیخ ملتون ٹاؤن، مردان ؛ الحاق : عبد الولی خان یونیورسٹی، مردان":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["فرزانہ خاتون","مس سباؤن"]}},"گورنمنٹ گرلز ڈگری کالج، کرنل شیر کلے، صوابی ؛ الحاق : ویمن یونیورسٹی صوابی":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر کوثر"]}},"گورنمنٹ گریجویٹ کالج، سمن آباد، فیصل آباد ؛ الحاق : جی سی یونیورسٹی، فیصل آباد":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر ساجد اسد اللہ","ڈاکٹر عمر حیات انصاری","ڈاکٹر محمد حامد رضا"]}},"گومل یونیورسٹی، ڈیرہ اسماعیل خان":{"depts":["اسلامیات و عربی"],"supervisors":{"اسلامیات و عربی":["محمد انور شاہ","ناہید علی زئی","وجیہ الدین نعمانی","وحید الدین","ڈاکٹر اظہار الحق","ڈاکٹر حافظ عبد المجید","ڈاکٹر فضل الٰہی خان","ڈاکٹر قاری واحد بخش","ڈاکٹر محمد اسلم خان","ڈاکٹر محمد اظہار الحق","ڈاکٹر محمد صدیق","ڈاکٹر محمد عبد اللہ عابد","ڈاکٹر منظور احمد اعوان","ڈاکٹر ناہید علی زئی","ڈاکٹر نجم الدین"]}},"گیبریل (Gabriel) کالج، منڈی بہاء الدین؛ الحاق : جی سی یونیورسٹی, لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["محمد عمیر","ڈاکٹر امتیاز احمد **","ڈاکٹر حافظ خورشید احمد قادری","ڈاکٹر سید محمد سلطان شاہ","ڈاکٹر محمد طیب عثمانی"]}},"ہائی ٹیک یونیورسٹی، ٹیکسلا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر فرہاد اللہ","ڈاکٹر قاری رب نواز","ڈاکٹر منظور احمد الازہری"]}},"ہزارہ یونیورسٹی، مانسہرہ":{"depts":["علوم اسلامیہ و دینیہ"],"supervisors":{"علوم اسلامیہ و دینیہ":["ڈاکٹر سعید الحق جدون","ڈاکٹر سید ازکیاء ہاشمی","ڈاکٹر محمد اسلم خان","ڈاکٹر محمد ایاز خان بنوی","ڈاکٹر محمد ریاض خان الازہری","ڈاکٹر محمد فیاض","ڈاکٹر مرسل فرمان","ڈاکٹر مطیع الرحمن"]}},"یونیورسٹی آف انجینئرنگ اینڈ ٹیکنالوجی، لاہور":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر حافظ محمد اسرائیل فاروقی","ڈاکٹر عرفان خالد ڈھلوں"]}},"یونیورسٹی آف اوکاڑہ، اوکاڑہ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر محمد زید لکھوی"]}},"یونیورسٹی آف ایگریکلچر، پشاور":{"depts":["علوم اسلامیہ و مطالعہ پاکستان"],"supervisors":{"علوم اسلامیہ و مطالعہ پاکستان":["ڈاکٹر سید نعیم بادشاہ بخاری","ڈاکٹر عباد الرحمن","ڈاکٹر محمد ایاز"]}},"یونیورسٹی آف بلوچستان، کوئٹہ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["رحمت اللہ اچکزئی","مسز فرح بتول","مفتی عبد الطاہر","ڈاکٹر امام الدین","ڈاکٹر سید حیدر شاہ","ڈاکٹر صاحبزادہ باز محمد","ڈاکٹر طاہرہ فردوس","ڈاکٹر عبد العلی اچکزئی","ڈاکٹر غلام محمد جعفر","ڈاکٹر محمد اشرف شاہین قیصرانی"]}},"یونیورسٹی آف سائنس اینڈ ٹیکنالوجی، بنوں":{"depts":["علوم اسلامیہ و تحقیق"],"supervisors":{"علوم اسلامیہ و تحقیق":["حافظ امیر نواز خان","ڈاکٹر حسین محمد قریشی","ڈاکٹر عبد القدوس","ڈاکٹر عرفان اللہ"]}},"یونیورسٹی آف سرگودھا، سرگودھا":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["سمیعہ اطہر","ڈاکٹر اشفاق احمد","ڈاکٹر زریں ایس ریاض","ڈاکٹر ساجد اقبال","ڈاکٹر شمس البصر","ڈاکٹر شمس العارفین","ڈاکٹر عبد الرؤوف ظفر","ڈاکٹر فرحت نسیم علوی","ڈاکٹر محمد شہباز منج","ڈاکٹر محمد فیروز الدین شاہ کھگہ","ڈاکٹر محمد ناصر محمود وڑائچ","ڈاکٹر محمد گجر خان کشمیری"]}},"یونیورسٹی آف سندھ، جام شورو":{"depts":["تقابلِ ادیان و ثقافتِ اسلامیہ"],"supervisors":{"تقابلِ ادیان و ثقافتِ اسلامیہ":["ڈاکٹر بشیر احمد رند","ڈاکٹر جبیں بھٹو","ڈاکٹر حافظ مختیار احمد کاندھڑو","ڈاکٹر حافظ منیر احمد خان","ڈاکٹر محمد انور خان پٹھان"]}},"یونیورسٹی آف سوات، سوات":{"depts":["علوم اسلامیہ و عربی"],"supervisors":{"علوم اسلامیہ و عربی":["ڈاکٹر جاوید خان"]}},"یونیورسٹی آف سیالکوٹ، سیالکوٹ":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر ذوہیب احمد","ڈاکٹر عبد الرحمن خان"]}},"یونیورسٹی آف ملاکنڈ، چکدرہ":{"depts":["علوم اسلامیہ و مذہبی امور"],"supervisors":{"علوم اسلامیہ و مذہبی امور":["ڈاکٹر جانس خان","ڈاکٹر سعید اختر*"]}},"یونیورسٹی آف مینجمنٹ اینڈ ٹیکنالوجی، لاہور":{"depts":["اسلامی فکر و تہذیب"],"supervisors":{"اسلامی فکر و تہذیب":["حناء قلبی","ڈاکٹر حافظ ساجد اقبال شیخ","ڈاکٹر حسن شکیل شاہ","ڈاکٹر حمیرا احمد","ڈاکٹر طاہرہ بشارت","ڈاکٹر عبد الرحمن خالد مدنی","ڈاکٹر عبد العلیم","ڈاکٹر محمد سمیع اللہ فراز","ڈاکٹر محمد طاہر مصطفیٰ"]}},"یونیورسٹی آف پشاور، پشاور":{"depts":["شیخ زاید اسلامک سنٹر","علوم اسلامیہ","مطالعاتِ سیرت"],"supervisors":{"*":["ڈاکٹر حافظ عبد الغفور","ڈاکٹر محمد عمر"],"شیخ زاید اسلامک سنٹر":["ڈاکٹر جمیلہ سڈل","ڈاکٹر حافظ حفاظت اللہ","ڈاکٹر دوست محمد خان","ڈاکٹر رشید احمد","ڈاکٹر صاحب اسلام","ڈاکٹر مشتاق احمد","ڈاکٹر معراج الاسلام ضیاء"],"علوم اسلامیہ":["ڈاکٹر جمیلہ سڈل","ڈاکٹر صاحب اسلام","ڈاکٹر ضیاء اللہ الازہری","ڈاکٹر عبد القادر سلیمان الازہری","ڈاکٹر مشتاق احمد","ڈاکٹر معراج الاسلام ضیاء"],"مطالعاتِ سیرت":["ڈاکٹر حافظ عبد الغفور","ڈاکٹر ضیاء اللہ الازہری","ڈاکٹر قبلہ ایاز","ڈاکٹر محمد رشید فاروقی","ڈاکٹر مسرت جمال","ڈاکٹر معراج الاسلام ضیاء"]}},"یونیورسٹی آف پنجاب، لاہور":{"depts":["ادارہ علوم اسلامیہ","شیخ زاید اسلامک سنٹر"],"supervisors":{"*":["ڈاکٹر حافظ عثمان احمد","ڈاکٹر طاہرہ بشارت","ڈاکٹر محمد سعد صدیقی"],"ادارہ علوم اسلامیہ":["حافظ محمد شریف","سکینہ فردوس","شعیب احمد","عبد الحئی صدیقی","عبد الحمید","عبد الرحیم ریحانی","قمر الدین خان","محمد عارف اظہر","مسز رفعت نواز","مسز شمیم چیمہ","مسز منزہ مصدق","مسز کوثر خالد","پروفیسر علم الدین سالک","ڈاکٹر احسان الرحمن غوری","ڈاکٹر اختر حسین عزمی","ڈاکٹر امان اللہ خان","ڈاکٹر برہان احمد فاروقی","ڈاکٹر بشیر احمد صدیقی","ڈاکٹر ثمر فاطمہ","ڈاکٹر جمیلہ شوکت","ڈاکٹر حافظ احمد یار خان","ڈاکٹر حافظ حسن مدنی","ڈاکٹر حافظ عثمان احمد","ڈاکٹر حافظ محمد اشرف","ڈاکٹر حافظ محمود اختر","ڈاکٹر خالد علوی","ڈاکٹر سعدیہ گلزار","ڈاکٹر سعید احمد سعیدی","ڈاکٹر سید عابد احمد علی","ڈاکٹر شاہدہ پروین","ڈاکٹر شبیر احمد منصوری","ڈاکٹر صباحت افضل","ڈاکٹر طاہرہ بشارت","ڈاکٹر علاؤ الدین صدیقی","ڈاکٹر غلام علی خان","ڈاکٹر محمد اسلم ملک","ڈاکٹر محمد افضل","ڈاکٹر محمد حماد احمد لکھوی","ڈاکٹر محمد حمید اللہ عبد القادر","ڈاکٹر محمد سعد صدیقی","ڈاکٹر محمد عاصم نعیم","ڈاکٹر محمد عبد اللہ*","ڈاکٹر محمد یوسف صدیق","ڈاکٹر مدثر احمد","ڈاکٹر ممتاز احمد سالک"],"شیخ زاید اسلامک سنٹر":["اسماء علی","ڈاکٹر اشتیاق احمد گوندل","ڈاکٹر ثمینہ سعدیہ","ڈاکٹر جمیلہ شوکت","ڈاکٹر حارث مبین","ڈاکٹر حافظ عبد اللہ*","ڈاکٹر حافظ محمد عبد القیوم","ڈاکٹر حافظ محمود اختر","ڈاکٹر سیدہ سعدیہ","ڈاکٹر غلام علی خان","ڈاکٹر محمد اعجاز","ڈاکٹر محمد اکرم چودھری","ڈاکٹر محمد عبد اللہ*","ڈاکٹر مفتی حافظ عبد الباسط خان"]}},"یونیورسٹی آف پونچھ، راولا کوٹ، آزاد جموں و کشمیر":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["ڈاکٹر عبد الرحمن خان","ڈاکٹر نگہت اکرم"]}},"یونیورسٹی آف کراچی، کراچی":{"depts":["اصول الدین","شعبہ قرآن و سنت","شیخ زاید اسلامک سنٹر","قرآن و سنت","کلیہ معارفِ اسلامی"],"supervisors":{"*":["ڈاکٹر فضل احمد"],"اصول الدین":["ڈاکٹر محمد حسام الدین منصوری","ڈاکٹر ناصر الدین صدیقی"],"شیخ زاید اسلامک سنٹر":["ڈاکٹر محمد عبد الشہید نعمانی"],"قرآن و سنت":["ڈاکٹر جلال الدین احمد نوری","ڈاکٹر زینت ہارون","ڈاکٹر شہناز غازی","ڈاکٹر عبد الرشید","ڈاکٹر عبید احمد خان","ڈاکٹر ناصر الدین صدیقی"],"کلیہ معارفِ اسلامی":["ڈاکٹر جلال الدین احمد نوری","ڈاکٹر جواد حیدر ہاشمی","ڈاکٹر حافظ محمد شکیل اوج","ڈاکٹر ریحانہ فردوس","ڈاکٹر زاہد علی زاہدی","ڈاکٹر صلاح الدین ثانی","ڈاکٹر عبید احمد خان","ڈاکٹر عمیر محمود صدیقی","ڈاکٹر محمد اختر سعید صدیقی","ڈاکٹر محمد حسام الدین منصوری","ڈاکٹر محمد عارف خان ساقی","ڈاکٹر محمد عاطف اسلم راؤ","ڈاکٹر محمد مظہر بقاء","ڈاکٹر ناصر الدین صدیقی"]}},"یونیورسٹی آف گجرات، گجرات":{"depts":["علوم اسلامیہ"],"supervisors":{"علوم اسلامیہ":["سید حامد فاروق بخاری","شعیب عارف","ڈاکٹر ارشد منیر لغاری","ڈاکٹر جمیل اختر","ڈاکٹر سید حامد فاروق بخاری","ڈاکٹر شعیب عارف","ڈاکٹر قاضی فرقان احمد","ڈاکٹر محمد حسیب","ڈاکٹر محمد ریاض محمود","ڈاکٹر محمد نواز","ڈاکٹر ندیم عباس"]}},"یونیورسٹی آف ہری پور، ہری پور":{"depts":["علوم اسلامیہ و دینیہ"],"supervisors":{"علوم اسلامیہ و دینیہ":["ڈاکٹر جنید اکبر","ڈاکٹر عبد المہیمن","ڈاکٹر عطاء اللہ","ڈاکٹر محمد اکرام اللہ خان"]}}};
+var SUPS = ["ابوالح","اسماء عزیز","ام سلمیٰ","امتیاز احمد***","ثناء ضیاء","حافظ آصف علی رضا","حافظ احمد دین","حافظ امیر نواز خان","حافظ حامد حماد","حافظ ذو الفقار علی","حافظ سلطان محمود خاکوانی","حافظ صلاح الدین*","حافظ عبد الکریم","حافظ محمد ارشد*","حافظ محمد اسلم","حافظ محمد اصغر","حافظ محمد طاہر مصطفیٰ","حافظ محمد عمار خان ناصر","حافظ مقبول احمد","حافظ نذیر احمد عابد","حسین احمد","حناء قلبی","خالد شبیر احمد","ذو الفقار علی قیصرانی","رؤوفہ اقبال","رحمت اللہ اچکزئی","رقیہ بانو","ساجدہ حنیف","سمیرا صفدر","سمیعہ اطہر","سید افتخار احمد شاہ بخاری","سید افتخار علی گیلانی","سید حامد فاروق بخاری","سید محمد اشرف","شازیہ عدنان","شبیر احمد جامی","شمیم وریام","شیر علی*","شیر علی**","صابر حسین نقشبندی","صبیحہ عبد القدوس","صلاح الدین**","ضیاء الرحمن ضیاء","ضیاء المصطفیٰ مکی الازہری","ظفر اقبال","عارفہ طارق","عبد البشیر آذری","عبد الحئی صدیقی","عبد الرؤوف زاہد","عبد الرحمن","عبد الرحیم","عبد الرحیم ریحانی","عبد السلام*","عبد السلام**","عبد اللہ خان","عبد اللہ***","عبد المجید جنجوعہ","عتیق امجد","عظمیٰ شہزادی","عظمیٰ صفت","عمر حیات انصاری","عنایت اللہ چودھری","فخر الزمان","فرمان الہی","فریدہ کاکڑ","قاری ڈاکٹر محمد طاہر","قاضی نصیر الدین","محمد ادریس لودھی","محمد اسلم ملک","محمد اظہر عباسی","محمد افضل کانجو","محمد اکرم خان نیازی","محمد اکرم رانا","محمد باقر خان خاکوانی","محمد ذو القرنین","محمد ریاض محمود","محمد شریف چودھری","محمد ظفر اقبال","محمد ظہیر احمد صدیقی","محمد عاصم نعیم","محمد عباس نقشبندی","محمد عطاء اللہ سراج","محمد محب اللہ","محمد نعیم مبشر","محمد نواز ظفر چشتی","محمود سلطان کھوکھر","محمودہ عرفان","مس سباؤن","مس سبین","مس سمیرا صفدر","مس ناصحہ","مسز انجم ریاض","مسز رفعت نواز","مسز طلعت صفدر","مسز فرح بتول","مسز فرحت الطاف","مسز مدثر حمید","مسز منزہ مصدق","مسز کوثر خالد","مفتی سعید الرحمن","مفتی عبد الطاہر","مفتی عبد القیوم خان","مولانا غلام مصطفیٰ قاسمی","مولانا محمد طیب***","مولانا منتخب الحق","ناہید خالق","ناہید علی زئی","نور الدین جامی","نور الزمان نوری","وجیہ الدین نعمانی","وحید الدین","پروفیسر علم الدین سالک","پرویز بلال","ڈاکٹر","ڈاکٹر آسیہ رشید","ڈاکٹر آسیہ شبیر منصوری","ڈاکٹر ابرار محی الدین مرزا","ڈاکٹر ابظاہر خان","ڈاکٹر ابو الفتح محمد صغیر الدین","ڈاکٹر ابو الفتح محمد صغیر الدین / ڈاکٹر عبد الرزاق میمن","ڈاکٹر ابو الوفا محمود","ڈاکٹر احسان الرحمن غوری","ڈاکٹر احمد اقبال قاسمی","ڈاکٹر احمد جان الازہری","ڈاکٹر احمد رضا","ڈاکٹر اختر حسین عزمی","ڈاکٹر ارشد منیر لغاری","ڈاکٹر اشتیاق احمد گوندل","ڈاکٹر اصغر علی خان","ڈاکٹر الطاف حسین لنگڑیال","ڈاکٹر امان اللہ خان","ڈاکٹر امان اللہ خان / ڈاکٹر بشیر احمد صدیقی","ڈاکٹر امتیاز احمد **","ڈاکٹر امتیاز احمد*","ڈاکٹر انوار اللہ طیبی","ڈاکٹر ایس ایم شریف","ڈاکٹر ایس ایم شریف / ڈاکٹر حافظ مفتی عبد الرزاق","ڈاکٹر بادشاہ رحمن","ڈاکٹر برہان احمد فاروقی","ڈاکٹر بشیر احمد صدیقی","ڈاکٹر تاج الدین الازہری","ڈاکٹر توقیر عالم فلاحی","ڈاکٹر ثمر فاطمہ","ڈاکٹر ثمر فاطمہ / ڈاکٹر محمد اکرم چودھری","ڈاکٹر ثمینہ سعدیہ","ڈاکٹر ثناء اللہ حسین","ڈاکٹر جانس خان","ڈاکٹر جلال الدین احمد نوری","ڈاکٹر جمیل احمد نتکانی","ڈاکٹر جمیلہ شوکت","ڈاکٹر جمیلہ شوکت / ڈاکٹر حافظ عبد اللہ","ڈاکٹر جمیلہ شوکت / ڈاکٹر محمد اعجاز","ڈاکٹر جنید احمد ہاشمی","ڈاکٹر جواد حیدر ہاشمی","ڈاکٹر حارث مبین","ڈاکٹر حافظ احمد یار خان","ڈاکٹر حافظ افتخار احمد","ڈاکٹر حافظ امجد حسین","ڈاکٹر حافظ انس نضر","ڈاکٹر حافظ ح","ڈاکٹر حافظ حامد حماد","ڈاکٹر حافظ حامد علی اعوان","ڈاکٹر حافظ حسن مدنی","ڈاکٹر حافظ حفاظت اللہ","ڈاکٹر حافظ خورشید احمد قادری","ڈاکٹر حافظ ساجد اقبال شیخ","ڈاکٹر حافظ ساجد انور","ڈاکٹر حافظ صالح الدین","ڈاکٹر حافظ صلاح الدین*","ڈاکٹر حافظ ضیاء الرحمن","ڈاکٹر حافظ طاہر اسلام عسکری","ڈاکٹر حافظ ظفر حسین","ڈاکٹر حافظ عبد الرحیم","ڈاکٹر حافظ عبد العلیم خان","ڈاکٹر حافظ عبد الغفار","ڈاکٹر حافظ عبد الغفور","ڈاکٹر حافظ عبد الغنی شیخ","ڈاکٹر حافظ عبد اللہ*","ڈاکٹر حافظ عبد المجید","ڈاکٹر حافظ عثمان احمد","ڈاکٹر حافظ عنایت اللہ","ڈاکٹر حافظ غلام انور الازہری","ڈاکٹر حافظ غلام محمد یوسف","ڈاکٹر حافظ فدا حسین","ڈاکٹر حافظ محمد ارشد اقبال","ڈاکٹر حافظ محمد اسماعیل عارفی","ڈاکٹر حافظ محمد اشرف","ڈاکٹر حافظ محمد سجاد","ڈاکٹر حافظ محمد سجاد / ڈاکٹر محمد ہمایوں عباس شمس","ڈاکٹر حافظ محمد سلیم سعیدی","ڈاکٹر حافظ محمد شبیر احمد","ڈاکٹر حافظ محمد شریف شاکر","ڈاکٹر حافظ محمد شکیل اوج","ڈاکٹر حافظ محمد شہباز حسن","ڈاکٹر حافظ محمد طاہر مصطفیٰ","ڈاکٹر حافظ محمد عبد القیوم","ڈاکٹر حافظ محمد نصر اللہ","ڈاکٹر حافظ محمد نعیم","ڈاکٹر حافظ محمود اختر","ڈاکٹر حافظ مسعود قاسم","ڈاکٹر حافظ مفتی عبد الرزاق","ڈاکٹر حبیب الرحمن","ڈاکٹر حسام الدین منصوری","ڈاکٹر حسین فاروق","ڈاکٹر حسین محمد قریشی","ڈاکٹر حمیرا احمد","ڈاکٹر حمیرا اشرف","ڈاکٹر حمیرا خلیل","ڈاکٹر خورشید الحسن رضوی","ڈاکٹر دوست محمد خان","ڈاکٹر ذو الفقار علی ملک","ڈاکٹر ذوہیب احمد","ڈاکٹر رانا مطلوب احمد","ڈاکٹر ریحانہ فردوس","ڈاکٹر زر نور بیگم","ڈاکٹر زریں ایس ریاض","ڈاکٹر ساجد اسد اللہ","ڈاکٹر ساجد اقبال","ڈاکٹر ساجد اقبال / ڈاکٹر اختر حسین عزمی","ڈاکٹر ساجد محمود","ڈاکٹر سجاد علی رئیسی","ڈاکٹر سجیلہ کوثر","ڈاکٹر سرفراز احمد اعوان","ڈاکٹر سعدیہ گلزار","ڈاکٹر سعید احمد اکبر آبادی","ڈاکٹر سعید احمد سعیدی","ڈاکٹر سعید اختر*","ڈاکٹر سعید اختر**","ڈاکٹر سعید الحق جدون","ڈاکٹر سعید الرحمن بن نور حبیب","ڈاکٹر سعید اللہ قاضی","ڈاکٹر سعید اللہ قاضی / ڈاکٹر عبد القیوم","ڈاکٹر سلمیٰ انجم","ڈاکٹر سلمیٰ محمود","ڈاکٹر سلیم خان","ڈاکٹر سمیع الحق*","ڈاکٹر سمیع الحق**","ڈاکٹر سمیع الحق***","ڈاکٹر سید ازکیاء ہاشمی","ڈاکٹر سید اظفار حیدر نقوی","ڈاکٹر سید باچا آغا","ڈاکٹر سید حیدر شاہ","ڈاکٹر سید عابد احمد علی","ڈاکٹر سید عبد الغفار بخاری","ڈاکٹر سید عبد المالک آغا","ڈاکٹر سید غضنفر احمد","ڈاکٹر سید مجتبیٰ حسن کامونپوری","ڈاکٹر سید محمد اشرف","ڈاکٹر سید محمد سلطان شاہ","ڈاکٹر سید محمد شاہد ترمذی","ڈاکٹر سید نعیم بادشاہ بخاری","ڈاکٹر سیدہ سعدیہ","ڈاکٹر شاہانہ تبسم","ڈاکٹر شاہدہ پروین","ڈاکٹر شبیر احمد","ڈاکٹر شبیر احمد جامی","ڈاکٹر شبیر احمد منصوری","ڈاکٹر شفاقت علی بغدادی","ڈاکٹر شمس الرحمن شمس","ڈاکٹر شمس العارفین","ڈاکٹر شہزادہ عمران ایوب","ڈاکٹر شیث محمد اسماعیل اعظمی","ڈاکٹر شیر علی*","ڈاکٹر شیر علی* / ڈاکٹر حافظ افتخار احمد","ڈاکٹر صاحبزادہ باز محمد","ڈاکٹر صاحبزادہ ساجد الرحمن","ڈاکٹر صاحبزادہ محمد عتیق حیدر","ڈاکٹر صباء نور","ڈاکٹر صدف سلطان","ڈاکٹر صلاح الدین ثانی","ڈاکٹر ضیاء الحق یوسفزئی","ڈاکٹر ضیاء الرحمن ضیاء","ڈاکٹر ضیاء اللہ الازہری","ڈاکٹر طاہرہ بشارت","ڈاکٹر طاہرہ عبد القدوس","ڈاکٹر طاہرہ فردوس","ڈاکٹر ظفر حسین ظفر","ڈاکٹر ظہور اللہ الازہری","ڈاکٹر عائشہ صنوبر","ڈاکٹر عباد الرحمن","ڈاکٹر عبد الحئی مدنی","ڈاکٹر عبد الحق","ڈاکٹر عبد الحمید خان عباسی","ڈاکٹر عبد الحکیم اکبری","ڈاکٹر عبد الخالق","ڈاکٹر عبد الخالق خان عباسی","ڈاکٹر عبد الرؤوف زاہد","ڈاکٹر عبد الرؤوف ظفر","ڈاکٹر عبد الرحمن خالد مدنی","ڈاکٹر عبد الرحمن خان","ڈاکٹر عبد الرحمن مدثر","ڈاکٹر عبد الرحمن کلوئی","ڈاکٹر عبد الرحیم سواتی","ڈاکٹر عبد الرزاق میمن","ڈاکٹر عبد الرشید","ڈاکٹر عبد الرشید رحمت","ڈاکٹر عبد الرشید قادری","ڈاکٹر عبد الستار انصاری","ڈاکٹر عبد الشکور ظہیر","ڈاکٹر عبد العلی اچکزئی","ڈاکٹر عبد العلیم","ڈاکٹر عبد العلیم خان","ڈاکٹر عبد الغفار","ڈاکٹر عبد الغفور بلوچ","ڈاکٹر عبد القادر بزدار","ڈاکٹر عبد القادر سلیمان الازہری","ڈاکٹر عبد القدوس","ڈاکٹر عبد القدوس خان","ڈاکٹر عبد القدوس صہیب","ڈاکٹر عبد اللہ**","ڈاکٹر عبد المالک","ڈاکٹر عبد المجید بغدادی","ڈاکٹر عبد المہیمن","ڈاکٹر عبد الواحد ہالیپوتہ","ڈاکٹر عبد الوہاب خان*","ڈاکٹر عبد الوہاب خان**","ڈاکٹر عبید احمد خان","ڈاکٹر عرفان اللہ","ڈاکٹر عرفان خالد ڈھلوں","ڈاکٹر عزیز النساء چنہ / ڈاکٹر عبد الرزاق میمن","ڈاکٹر عطاء الرحمن","ڈاکٹر عظمیٰ بیگم","ڈاکٹر عظمیٰ پروین","ڈاکٹر عقیل احمد*","ڈاکٹر عقیل احمد**","ڈاکٹر علاؤ الدین صدیقی","ڈاکٹر علی اصغر سلیمی","ڈاکٹر علی اصغر چشتی","ڈاکٹر علی اکبر الازہری","ڈاکٹر عمارہ رحمن","ڈاکٹر عمارہ رحمٰن","ڈاکٹر عمر حیات انصاری","ڈاکٹر عمیر محمود صدیقی","ڈاکٹر غلام اللہ خان","ڈاکٹر غلام شمس الرحمن","ڈاکٹر غلام محمد جعفر","ڈاکٹر غلام مصطفیٰ قاسمی","ڈاکٹر فرحت نسیم علوی","ڈاکٹر فرحت نسیم علوی / ڈاکٹر عبد الرؤوف ظفر","ڈاکٹر فرہاد اللہ","ڈاکٹر فریدہ یوسف","ڈاکٹر فضل الرحمن گنوری","ڈاکٹر فضل الٰہی خان","ڈاکٹر فیاض الحسن الازہری","ڈاکٹر قاری ابو الحسن شبیر احمد","ڈاکٹر قاری ابوالحسن شبیر احمد","ڈاکٹر قاری تاج افسر","ڈاکٹر قاری رب نواز","ڈاکٹر قاری محمد رفیق صادق","ڈاکٹر قاری واحد بخش","ڈاکٹر قاریہ نسرین اختر","ڈاکٹر قاضی زین الساجدین صدیقی","ڈاکٹر قاضی فرقان احمد","ڈاکٹر قاضی مجیب الرحمن الازہری","ڈاکٹر قدسیہ خاکوانی","ڈاکٹر قلب بشیر خاور بٹ","ڈاکٹر مبشر حسین","ڈاکٹر محفوظ احمد","ڈاکٹر محمد اختر سعید صدیقی","ڈاکٹر محمد ادریس لودھی","ڈاکٹر محمد ارشد نقشبندی","ڈاکٹر محمد ارشد*","ڈاکٹر محمد ارشد**","ڈاکٹر محمد ارشد***","ڈاکٹر محمد اسحاق مدنی","ڈاکٹر محمد اسحاق*","ڈاکٹر محمد اسحاق**","ڈاکٹر محمد اسرائیل خان","ڈاکٹر محمد اسلم خان","ڈاکٹر محمد اسلم ملک","ڈاکٹر محمد اشرف شاہین قیصرانی","ڈاکٹر محمد اظہار الحق","ڈاکٹر محمد افتخار کھوکھر","ڈاکٹر محمد افضل","ڈاکٹر محمد افضل کانجو","ڈاکٹر محمد اقبال خان","ڈاکٹر محمد الیاس اعظمی","ڈاکٹر محمد الیاس عزیز","ڈاکٹر محمد امجد","ڈاکٹر محمد امین*","ڈاکٹر محمد امین**","ڈاکٹر محمد انور خان پٹھان","ڈاکٹر محمد انیس خان","ڈاکٹر محمد اکرام اللہ خان","ڈاکٹر محمد اکرم رانا","ڈاکٹر محمد اکرم رانا / صبیحہ عبد القدوس","ڈاکٹر محمد اکرم ورک","ڈاکٹر محمد اکرم چودھری","ڈاکٹر محمد ایاز خان بنوی","ڈاکٹر محمد باقر خان خاکوانی","ڈاکٹر محمد تاج الدین کالامی","ڈاکٹر محمد حامد رضا","ڈاکٹر محمد حامد رضا / ڈاکٹر حافظ افتخار احمد","ڈاکٹر محمد حبیب اللہ قاسمی","ڈاکٹر محمد حسام الدین منصوری","ڈاکٹر محمد حسین آزاد","ڈاکٹر محمد حماد","ڈاکٹر محمد حماد احمد لکھوی","ڈاکٹر محمد حمید اللہ عبد القادر","ڈاکٹر محمد خان ملک","ڈاکٹر محمد رمضان نجم باروی","ڈاکٹر محمد ریاض خان الازہری","ڈاکٹر محمد ریاض محمود","ڈاکٹر محمد زبیر عثمانی","ڈاکٹر محمد سرفراز خالد","ڈاکٹر محمد سعد صدیقی","ڈاکٹر محمد سعود عالم قاسمی","ڈاکٹر محمد سعید","ڈاکٹر محمد سلیم شاہ","ڈاکٹر محمد سمیع اللہ فراز","ڈاکٹر محمد سہیل شفیق","ڈاکٹر محمد شہباز منج","ڈاکٹر محمد صدیق","ڈاکٹر محمد صدیق سیالوی","ڈاکٹر محمد صغیر حسین معصومی","ڈاکٹر محمد طارق رمضان","ڈاکٹر محمد طاہر","ڈاکٹر محمد طاہر مصطفیٰ","ڈاکٹر محمد طاہر ملک","ڈاکٹر محمد طفیل ہاشمی","ڈاکٹر محمد طیب خان","ڈاکٹر محمد طیب عثمانی","ڈاکٹر محمد طیب*","ڈاکٹر محمد طیب**","ڈاکٹر محمد ظہیر احمد صدیقی","ڈاکٹر محمد عابد ندیم","ڈاکٹر محمد عاصم نعیم","ڈاکٹر محمد عاطف اسلم راؤ","ڈاکٹر محمد عالم خان","ڈاکٹر محمد عبد الشہید نعمانی","ڈاکٹر محمد عبد اللہ صالح","ڈاکٹر محمد عبد اللہ عابد","ڈاکٹر محمد عبد اللہ قاضی","ڈاکٹر محمد عبد اللہ*","ڈاکٹر محمد عبد اللہ**","ڈاکٹر محمد عبد اللہ***","ڈاکٹر محمد عمر راحیل","ڈاکٹر محمد عمر فاروق راشد","ڈاکٹر محمد عمران*","ڈاکٹر محمد عمران**","ڈاکٹر محمد عمران***","ڈاکٹر محمد فاروق حیدر","ڈاکٹر محمد فخر الدین","ڈاکٹر محمد فیاض","ڈاکٹر محمد فیروز الدین شاہ کھگہ","ڈاکٹر محمد فیروز الدین شاہ کھگہ / ڈاکٹر مدثر حسین","ڈاکٹر محمد محبوب الرحمن","ڈاکٹر محمد ممتاز الحسن باروی","ڈاکٹر محمد منیر اظہر","ڈاکٹر محمد میاں صدیقی","ڈاکٹر محمد ناصر محمود وڑائچ","ڈاکٹر محمد نعیم انور الازہری","ڈاکٹر محمد نعیم صدیقی","ڈاکٹر محمد نواز","ڈاکٹر محمد نواز الحسنی","ڈاکٹر محمد نواز چودھری","ڈاکٹر محمد کریم خان","ڈاکٹر محمد گجر خان کشمیری","ڈاکٹر محمد ہارون","ڈاکٹر محمد ہمایوں عباس شمس","ڈاکٹر محمد ہمایوں عباس شمس / ڈاکٹر حافظ افتخار احمد","ڈاکٹر محمد ہمایوں عباس شمس / ڈاکٹر عمرانہ شہزادی","ڈاکٹر محمد یوسف صدیق","ڈاکٹر محمد یوسف فاروقی","ڈاکٹر محمود احمد عبد اللہ","ڈاکٹر محمود احمد غازی","ڈاکٹر محمود الحسن عارف","ڈاکٹر محمود سلطان کھوکھر","ڈاکٹر محی الدین ہاشمی","ڈاکٹر مدثر احمد","ڈاکٹر مدثر حسین","ڈاکٹر مستفیض احمد علوی","ڈاکٹر مسعود احمد مجاہد","ڈاکٹر مشتاق احمد","ڈاکٹر مصباح منور","ڈاکٹر مظہر معین","ڈاکٹر معراج الاسلام ضیاء","ڈاکٹر معین الدین ہاشمی","ڈاکٹر مفتی حافظ عبد الباسط خان","ڈاکٹر مفتی سعید الرحمن","ڈاکٹر مفتی سعید الرحمن / ڈاکٹر عبد السلام***","ڈاکٹر مفتی عمران الحق کلیانوی","ڈاکٹر مفتی محمد التماس خان","ڈاکٹر مقبول حسن گیلانی","ڈاکٹر مقدس اللہ","ڈاکٹر ممتاز احمد سالک","ڈاکٹر ممتاز احمد سدیدی","ڈاکٹر منزہ حیات","ڈاکٹر منظور احمد اعوان","ڈاکٹر منظور احمد الازہری","ڈاکٹر منیر احمد*","ڈاکٹر منیر احمد**","ڈاکٹر نائلہ صفدر","ڈاکٹر ناصر الدین صدیقی","ڈاکٹر ناصر الدین ناصر","ڈاکٹر ناہید آرائیں","ڈاکٹر نبیلہ فلک","ڈاکٹر نثار احمد*","ڈاکٹر نثار احمد**","ڈاکٹر نثار محمد","ڈاکٹر نجم الدین","ڈاکٹر ندیم عباس","ڈاکٹر نسیم محمود","ڈاکٹر نصرت جبین","ڈاکٹر نصیر احمد اختر","ڈاکٹر نصیر اختر","ڈاکٹر نور الدین جامی","ڈاکٹر نور الدین جامی / ڈاکٹر انوار احمد","ڈاکٹر نور حیات خان","ڈاکٹر نوید احمد شہزاد","ڈاکٹر نیاز محمد","ڈاکٹر کامران حسین وٹو","ڈاکٹر کلثوم پراچہ","ڈاکٹر کلیم اللہ خان","ڈاکٹر گجر خان کشمیری","ڈاکٹر گلزار علی","ڈاکٹر یاسر عرفات","ڈاکٹر یاسر فاروق","ہاجرہ یاسمین"];
+var RAWMAP = {"ڈاکٹر سید شبیر احمد منصوری":256,"ڈاکٹر محمد شبیر احمد منصوری":256,"ڈاکٹر محمود اختر":198,"ڈاکٹر محمد ہمایوں عباس شمس ڈاکٹر افتخار احمد":460,"ڈاکٹر حافظ محمد سجاد ڈاکٹر محمد ہمایوں عباس شمس":188,"ڈاکٹر محمد ہمایوں عباس":459,"ڈاکٹر محمد ہمایوں / ڈاکٹر عمرانہ شہزادی":461,"ڈاکٹر ہمایوں عباس":459,"ڈاکٹر ہمایوں عباس شمس":459,"ڈاکٹر جمیلہ شوکت ڈاکٹر حافظ عبد اللہ":150,"ڈاکٹر محمد حماد لکھوی":397,"ڈاکٹرامان اللہ خان":130,"ڈاکٹر ادریس لودھی":359,"ڈاکٹر محمد اور لیس لودھی":359,"ڈاکٹر شیر علی":262,"ڈاکٹر شیر علی ڈاکٹر افتخار احمد":263,"محمد اکرم رانا":384,"ڈاکٹر حمید اللہ عبد القادر":398,"ڈاکٹر علامہ علاؤ الدین صدیقی":325,"علامہ علاؤ الدین صدیقی":325,"ڈاکٹر علاؤالدین صدیقی":325,"علاؤالدین صدیقی":325,"ڈاکٹر شہباز منج":411,"ڈاکٹر ثمر فاطمہ مسعود":142,"ڈاکٹر ثمر فاطمہ ادارہ علوم اسلامیہ":142,"ڈاکٹر افتخار احمد":156,"ڈاکٹر افتخار احمد خان":156,"ڈاکٹر محمد حامد رضا ڈاکٹر افتخار احمد":392,"پر وفیسر ڈاکٹر عبد القدوس صہیب":308,"عبد القدوس صہیب":308,"ڈاکٹر محمود سلطان کھو کھر":467,"محمود سلطان کھو کھر":85,"ڈاکٹر محمد سلطان کھو کھر":467,"ڈاکٹر محمد افتخار کھو کھر":372,"ڈاکٹر عبد الرؤف ظفر":287,"ڈاکٹر فرحت نسیم علوی / ڈاکٹر عبد الرؤف ظفر":338,"ڈاکٹر محمد عبید احمد خان":316,"ڈاکٹر فاروق حیدر":441,"ڈاکٹر حافظہ شاہدہ پروین":253,"حافظہ شاہدہ پروین":253,"ڈاکٹر حافظ شاہدہ پروین":253,"ڈاکٹر محمد فیروزالدین شاہ کھگہ":444,"ڈاکٹر محمد فیروز الدین":444,"ڈاکٹر محمد فیروز الدین شاہ":444,"ڈاکٹر محمد فیروز الدین شاہ / ڈاکٹر مدثر حسین":445,"ڈاکٹر محمد فیروزالدین شاہ":444,"احسان الرحمن غوری":121,"ڈاکٹر محمد ریاض خان":401,"ڈاکٹر محمد ریاض":401,"ڈاکٹر محمد ریاض الازہری":401,"مرزا نجم ریاض":91,"انجم ریاض":91,"ڈاکٹر نورالدین جامی":506,"ڈاکٹر حافظ شبیر احمد جامی":255,"ڈاکٹر محمد شبیر احمد جامی":255,"ڈاکٹر محمد نعیم انور":451,"ڈاکٹر حافظ محمد نعیم الازہری":197,"حافظ محمد نعیم":197,"ڈاکٹر ابرار محی الدین":116,"ڈاکٹر حامد رضا":391,"ڈاکٹر خواجہ حامد رضا":391,"نورالدین جامی":107,"ڈاکٹر حافظ ثناء اللہ حسین":145,"ڈاکٹر ثناء اللہ":145,"ڈاکٹر عاطف اسلم راؤ":427,"ڈاکٹر حافظ محمد سجاد تترالوی":187,"ڈاکٹر محمد سجاد":187,"ڈاکٹر عابد ندیم":425,"منزہ حیات":487,"ڈاکٹر محمد ساجد اقبال":217,"ڈاکٹر ساجد اقبال شیخ":165,"حافظ ساجد اقبال":165,"ڈاکٹر حافظ ساجد اقبال":165,"ڈاکٹر مطلوب احمد شعبہ علوم اسلامیہ و عربی":212,"ڈاکٹر مطلوب احمد":212,"ڈاکٹر مطلوب احمد رانا":212,"ڈاکٹر سمیع اللہ فراز":409,"ڈاکٹر فرحت سیم علوی":337,"سمیر اصفدر":28,"عبد الرشید قادری":296,"ڈاکٹر محمد طاہر مصطفی":417,"ڈاکٹر محمد طاہر المصطفے":417,"ڈاکٹر محمد طاہر":65,"ڈاکٹر قاری محمد طاہر":65,"اسلم ملک":369,"ملک محمد اسلم":68,"محمد اسلم":68,"ڈاکٹر محمد اسلم":368,"محمد اسلم خان مروت":368,"محمد اسلم خان":368,"ڈاکٹر محمد مسعود احمد":472,"ڈاکٹر ازکیاء ہاشمی":238,"ڈاکٹر ڈاکٹر سید ازکیاء ہاشمی":238,"ڈاکٹر سید ازکیا ہاشمی":238,"ڈاکٹر سید از کیہ ہاشمی":238,"ڈاکٹر شاہ معین الدین ہاشمی":477,"شاہ معین الدین ہاشمی":477,"ڈاکٹر شاہ جنید احمد شاہ ہاشمی":152,"ڈاکٹر شاہ جنید احمد ہاشمی":152,"نصرت جبین":503,"ڈاکٹر عطاءالرحمن":320,"ناہید علیزئی":106,"ڈاکٹر واحد بخش":349,"قاری واحد بخش":349,"واحد بخش":349,"علی اصغر سلیمی":326,"ڈاکٹر یاسر عرفات اعوان":516,"ڈاکٹر محمد یاسر عرفات اعوان":516,"ڈاکٹر عثمان احمد":179,"فریدہ یوسف":340,"ڈاکٹر صاحب زادہ باز محمد":264,"صاحب زادہ ڈاکٹر باز محمد":264,"ڈاکٹر محمد انور پٹھان":381,"ڈاکٹر انور خان پٹھان":381,"ڈاکٹر نور حیات":508,"نور حیات":508,"ڈاکٹر غلام یوسف":182,"ڈاکٹر حافظ غلام یوسف":182,"ڈاکٹر حافظ صالح الدین حقانی":167,"ڈاکٹر صالح الدین":167,"ڈاکٹر الطاف حسین":129,"ڈاکٹر عاصم نعیم":426,"ڈاکٹر عاصم نعیم کھوکھر":426,"ڈاکٹر حافظ عاصم نعیم":426,"ڈاکٹر سرفراز خالد":404,"ڈاکٹر ممتاز الحسن باردی":447,"ممتاز الحسن باروی":447,"ڈاکٹر ممتاز الحسن باروی":447,"ڈاکٹر ممتاز احسن باروی":447,"ڈاکٹر محمد ممتاز احمد سدیدی":486,"ممتاز احمد سدیدی":486,"ڈاکٹر ممتاز سدیدی":486,"ڈاکٹر سلمی محمود":233,"ڈاکٹر ضیاء الرحمن":169,"ضیاء الرحمن ضیاء":271,"ڈاکٹر حافظ شہزادہ عمران ایوب":260,"ڈاکٹر حافظ ایس ایم شریف":135,"ڈاکٹرایس ایم شریف":135,"ڈاکٹر ایس ایم شریف / عبد الرزاق":136,"ڈاکٹر شفاقت علی البغدادی":257,"ڈاکٹر شفاقت علی الازہری":257,"ڈاکٹر شفاقت الازہری":257,"ڈاکٹر محمد شفاقت الازہری":257,"ڈاکٹر رانا عبد الرحمن خالد مدنی":288,"ڈاکٹر اے خالد مدنی":288,"ڈاکٹر رانا خالد مدنی":288,"خورشید احمد قادری":164,"ڈاکٹر حافظ محمد خورشید احمد قادری":164,"ڈاکٹر خورشید احمد قادری":164,"ڈاکٹر ظہور اللہ ازہری":277,"ڈاکٹر ظہور اللہ اظہر":277,"ڈاکٹر ظہور اللہ":277,"ڈاکٹر حیدر شاہ":241,"ڈاکٹر نعیم بادشاہ بخاری":250,"ڈاکٹر بادشاہ رحمن ازہری":137,"ڈاکٹر بادشاہ رحمن الازہری":137,"ڈاکٹر حسن مدنی":162,"ڈاکٹر منظور احمد":488,"عبد الرشید":294,"ڈاکٹر علی اکبر الازہری قادری":328,"ڈاکٹر مستفیض علوی":471,"ڈاکٹر حافظ انس نضر مدنی":158,"ڈاکٹر انس نضر":158,"طارق رمضان":415,"حافظ یار احمد خان":155,"ڈاکٹر حافظ پیار احمد خان":155,"ڈاکٹر امجد":378,"ڈاکٹر اصغر علی":128,"ڈاکٹر نیاز محمد محکمہ اعلی تعلیم حکومت خیبر پختونخوا":510,"علاؤ الدین صدیقی":325,"ڈاکٹر عبد الغفار بخاری":243,"عبد الغفار":302,"ڈاکٹر عابد احمد علی":242,"ڈاکٹر سید عابد احمد علوی":242,"ڈاکٹر اکرم ورک":386,"ڈاکٹر شبیر احمد جامعی":255,"ڈاکٹر حافظ شبیر احمد جامعی":255,"ڈاکٹر وحید الدین":110,"حافظ مسعود قاسم":199,"ڈاکٹر مسعود قاسم":199,"ڈاکٹر علی اکبر قادری الازہری":328,"ڈاکٹر عبد الرزاق گوندل":200,"عبد الرازق گوندل":200,"محمد اظہار الحق":371,"ڈاکٹر عبد العلی اچک زئی":299,"ڈاکٹر محمد عبد العلی اچک زئی":299,"ڈاکٹر محمد عبد العلی اچکزئی":299,"ڈاکٹر محمد عبد الاعلی اچکزئی":299,"ڈاکٹر سجاد علی":220,"محمد نواز ظفر":84,"ڈاکٹر محمد نواز چوہدری":455,"محمد الیاس اعظمی":376,"ڈاکٹر سعدیہ گل زار":223,"ڈاکٹر شمینہ سعدیہ":144,"نجم الدین":500,"ڈاکٹر غلام انور الازہری":181,"ڈاکٹر قاری محمد رمضان انجم باروی":400,"ڈاکٹر قاری محمد رمضان نجم باروی":400,"ڈاکٹر رمضان نجم باروی":400,"ڈاکٹر محمد رمضان باروی":400,"ڈاکٹر رانا محمد افضل":373,"ڈاکٹر افضل کانجو":374,"محمد افضل":70,"ڈاکٹر محمد افضل قادری":374,"ڈاکٹر احمد رضا سعیدی":124,"ڈاکٹر حسام الدین":202,"ڈاکٹر مفتی محمد کریم خان":456,"ڈاکٹر حافظ شریف شاکر":191,"ڈاکٹر محمد شریف شاکر":191,"ڈاکٹر شریف شاکر":191,"ڈاکٹر امجد حسین":157,"طاہرہ فردوس":275,"ڈاکٹر ایاز خان":388,"ڈاکٹر حسین محمد":204,"ڈاکٹر محمد اکرام اللہ":383,"ڈاکٹر ضیاء اللہ ازہری":272,"حنا قلبی":21,"محمد حبیب اللہ":393,"ڈاکٹر حافظ محمد حبیب اللہ":393,"ڈاکٹر ریاض محمود":402,"ڈاکٹر قاضی فرقان":352,"طلعت صفدر":93,"طاہرہ عبد القدوس":274,"سید افتخار احمد شاہ":30,"افتخار احمد شاہ بخاری":30,"عاصم نعیم":79,"ڈاکٹر محمد ارشد اقبال":184,"ابوالحسن شبیر احمد":344,"ڈاکٹر ابو الحسن شبیر احمد":344,"ڈاکٹر ابوالحسن شبیر احمد":344,"سمیرا صفدر":89,"ڈاکٹر گل زار علی":515,"ڈاکٹر گل زار علی یونیورسٹی آف سوات کانجو ٹاؤن شپ سوات":515,"ڈاکٹر سعد یہ گل زار":223,"ڈاکٹر سعدیہ گل زار ادارہ علوم اسلامیہ":223,"حافظ عبد المجید":178,"ڈاکٹر عبد المجید":178,"ڈاکٹر عبد الحمید بغدادی":311,"ڈاکٹر سید اظفار حیدر شاہ نقوی":239,"فرح بتول":94,"ڈاکٹر سلطان شاہ":248,"ڈاکٹر محمد سلطان شاہ":248,"ڈاکٹر سید سلطان شاہ":248,"سید افتخار احمد":30,"مسز شاہانہ تبسم":252,"شاہانہ تبسم":252,"ڈاکٹر حافظ صلاح الدین یوسف":168,"ڈاکٹر صلاح الدین":168,"ڈاکٹر صلاح الدین یوسف":168,"جلال الدین احمد نوری":147,"ڈاکٹر جلال الدین نوری":147,"ڈاکٹر ضیاء الحق یوسف زئی":270,"ڈاکٹر ضیاء الحق":270,"محمد خان ملک":399,"برہان احمد فاروقی":138,"عظمی صفت":59,"ڈاکٹر اشتیاق احمد معاون رضوان محمود":127,"حمیرا خلیل":207,"حمیرا اخلیل":207,"ڈاکٹر محمد رمضان انجم باردی":400,"ڈاکٹر محمد رمضان نجم باردی":400,"ڈاکٹر محمد شکیل اوج":192,"ڈاکٹر حافظ محمد شکیل اوج شہید":192,"ڈاکٹر محمد عبد القیوم":195,"ڈاکٹر حافظ عبد القیوم":195,"ڈاکٹر جمیل احمد":148,"ڈاکٹر جمیل احمد نیکانی":148,"ڈاکٹر جمیل احمد نظامی":148,"ڈاکٹر جمیل نتکانی":148,"ڈاکٹر جمیل شوکت":149,"ڈاکٹر فضل الہی":342,"ڈاکٹر محمد رمضان":400,"عبد الرحمن مدثر":290,"سمیعہ اظہر":29,"ڈاکٹر حافظ عبد اللہ":177,"ڈاکٹر محمد باقرخان خاکوانی":389,"ڈاکٹر باقر خاکوانی":389,"ڈاکٹر باقرخان خاکوانی":389,"ڈاکٹر باقر خان خاکوانی":389,"باقرخان خاکوانی":73,"باقر خان خاکوانی":73,"قدسیہ خاکوانی":354,"مسز قدسیہ خاکوانی":354,"مسنز مدثر حمید":96,"مدثر حمید":96,"ڈاکٹر الیاس عزیز":377,"حافظ مفتی عبد الرزاق":200,"حافظ عبد الرزاق":200,"ڈاکٹر عبد الرزاق":200,"ڈاکٹر مفتی عبد الرزاق":200,"عبد الرزاق":200,"مفتی عبد الرزاق":200,"عبد الرزاق میمن":293,"ڈاکٹر ابو الفتح محمد صغیر الدین / عبد الرزاق میمن":119,"ڈاکٹر ممتاز احمد ملک":485,"ڈاکٹر ممتاز احمد صدیقی":486,"ڈاکٹر یا سر فاروق":517,"محمد سعید":407,"ڈاکٹر محمد سعید صدیقی":405,"ڈاکٹر محمد اقبال نکیانہ":375,"ڈاکٹر محمد اقبال":375,"ڈاکٹر دوست محمد":209,"ڈاکٹر محمد اکرم را نا":384,"محمد اکرم را نا":72,"ڈاکٹر حافظ محمد حماد":160,"ڈاکٹر حماد لکھوی":397,"ڈاکٹر حافظ محمد حماد لکھوی":397,"ڈاکٹر حماد احمد لکھوی":397,"ڈاکٹر حمد حماد لکھوی":397,"ڈاکٹر محمد عبد الخالق خان":285,"محمد طیب عثمانی":421,"مولانا محمد طیب":103,"ڈاکٹر صاحب زادہ ساجد الرحمن":265,"ڈاکٹر ساجد الرحمن":265,"ڈاکٹر تاج الدین":140,"ڈاکٹر تاج الدین از ہری":140,"ڈاکٹر تاج الدین ازہری":140,"ڈاکٹر محمود الحسن":466,"ڈاکٹر اختر عزمی":125,"ڈاکٹر ناصر محمود وڑائچ":450,"ڈاکٹر محمد ناصر محمود ڈوگر":450,"ڈاکٹر عبد اللہ قاضی":432,"محمد ریاض":75,"عظیمی صفت":59,"ڈاکٹر حافظ شبیر احمد ابوالح":344,"ڈاکٹر محمد رضا":391,"نوید احمد شہزاد":509,"ڈاکٹر عمر حیات":331,"عمر حیات":60,"ڈاکٹر حافظ محمد عمار خان ناصر":17,"ڈاکٹر محمد عمار خان ناصر":17,"ابو الحسن شبیر احمد":344,"ڈاکٹر شبیر احمد ابو الحسن":344,"ڈاکٹر شبیر احمد ابوالحسن":344,"ڈاکٹر حافظ شبیر احمد":190,"ڈاکٹر حافظ شبیر احمد ابوالحسن":344,"ڈاکٹر حافظ نصر اللہ":196,"ڈاکٹر محمد نصر اللہ":196,"حافظ محمد نصر اللہ":196,"ڈاکٹر حافظ محمد نصر اللہ خان":196,"ڈاکٹر سجلیہ کوثر":221,"ڈاکٹر محمد گجر خان":457,"ڈاکٹر گجر خان":457,"ڈاکٹر محمد گجر خان غزل کاشمیری":457,"ڈاکٹر گجر خان غزل کشمیری":457,"ڈاکٹر گجر خان غزل کاشمیری":457,"ڈاکٹر گجر غزل خان کاشمیری":514,"ندیم عباس":501,"احمد دین":6,"نصیر احمد اختر":504,"ڈاکٹر قاری محمد فیاض":443,"عمارہ رحمن":330,"ساجد محمود":219,"ڈاکٹر عبد المالک آغا":244,"ڈاکٹر سید با چا آغا":240,"ڈاکٹر سردار محمد اسرائیل خان":367,"ڈاکٹر محمد اسرائیل":367,"ڈاکٹر سردار محمد اسرائیل":367,"ڈاکٹر شمس الرحمن":258,"ڈاکٹر عبد القادر سلیمان":305,"ڈاکٹر محمد ارشد نقش بندی":360,"ڈاکٹر حافظ عبد الباسط خان":478,"ڈاکٹر عبد الباسط خان":478,"ڈاکٹر مفتی عبد الباسط خان":478,"ڈاکٹر حافظ عبد الباسط":478,"ڈاکٹر حافظ مفتی عبد الباسط خان":478,"ڈاکٹر باد شاہ رحمن الازہری":137,"محمد شمس العارفین":259,"شمس العارفین":259,"ڈاکٹر جواد حیدر":153,"ڈاکٹر عنایت اللہ":180,"حافظ عنایت اللہ":180,"ڈاکٹر محمد سعود عالم صدیقی":406,"حافظ عبد العلیم خان":173,"ڈاکٹر اشرف شاہین قیصرانی":370,"سلیم خان":234,"ڈاکٹر محمد عالم":428,"ڈاکٹر عبد العلیم خان":173,"ڈاکٹر ممتاز سالک":485,"ڈاکٹر متاز احمد سالک":485,"ڈاکٹر فدا حسین":183,"عبد القادر بزدار":304,"ڈاکٹر حسین آزاد":395,"مسز ہاجرہ یاسمین":518,"ڈاکٹر مسز زریں ایس ریاض":215,"وجیہ الدین":109,"وجیہ الدین نعمان":109,"محمد وجیہ الدین نعمان":109,"محمد صدیق":412,"ڈاکٹر میاں محمد صدیق":449,"ڈاکٹر میاں محمد صدیقی":449,"ڈاکٹر آسیہ شبیر":115,"ڈاکٹر آسیہ":115,"آسیہ رشید":114,"ڈاکٹر رب نواز":347,"ڈاکٹر حافظ قاری رب نواز":347,"ڈاکٹر محمد اشرف":186,"سید محمد اشرف علی شاہ":33,"ڈاکٹر عبد اللہ عابد":431,"عبد اللہ عابد":431,"ڈاکٹر محمد اسماعیل عارفی":185,"ڈاکٹر اسماعیل عارفی":185,"ڈاکٹر سید از کیاء ہاشمی":238,"ڈاکٹر فیاض الحسن":343,"ڈاکٹر فیاض الحسن جمیل الازہری":343,"ڈاکٹر فضل الہی خان":342,"صابر حسین نقش بندی":39,"ڈاکٹر ابوالوفاء محمود":120,"ڈاکٹر حافظ محمد سہیل شفیق":410,"ڈاکٹر صدف سلطانہ":268,"ڈاکٹر یوسف صدیق":462,"ڈاکٹر امان اللہ":130,"امان اللہ خان":130,"ڈاکٹر ذوالفقار علی ملک":210,"حافظ ذوالفقار علی":9,"ذوالفقار علی قیصرانی":23,"ڈاکٹر منیر اظہر":448,"ڈاکٹر محمود احمد":464,"ڈاکٹر یوسف فاروقی":463,"ڈاکٹر حافظ محمد سلیم":189,"محمد عمر راحیل":436,"ڈاکٹر عبادالرحمن":279,"علامہ غلام مصطفی قاسمی":102,"غلام مصطفی قاسمی":336,"ڈاکٹر غلام مصطفی قاسمی":336,"حافظ ساجد انور":166,"ڈاکٹر زوہیب احمد":211,"امیر نواز خان":7,"ڈاکٹر نواز حسنی":454,"ڈاکٹر عبد الرؤف زاہد":286,"عبد الرؤف زاہد":48,"ڈاکٹر منظور":488,"حبیب الرحمن":201,"ڈاکٹر سعید احمد":225,"ڈاکٹر عبد القیوم":195,"ام سلمی":2,"ڈاکٹر سلمی انجم":232,"قاریہ نسرین اختر":350,"حافظ حامد علی اعوان":161,"ڈاکٹر حامد علی اعوان":161,"ڈاکٹر حسام الدین منصوری":394,"سیدہ سعدیہ":251,"ڈاکٹر حافظ یار احمد خان":155,"ڈاکٹر صبانور":267,"نورالزمان نوری":108,"ڈاکٹر گجر خان کاشمیری":457,"فرحت الطاف":95,"مس فرحت الطاف":95,"ڈاکٹر محمد کریم":456,"منزہ مصدق":97,"ڈاکٹر غضنفر احمد خان":245,"ڈاکٹر حافظ محمد شبیر":190,"نصیر الدین":66,"نصیرالدین":504,"ڈاکٹر نصیر احمد اختر":505,"ڈاکٹر ایس ایم اشرف":247,"محمد طیب خان":420,"محمد طیب":422,"حمیر اخلیل":207,"ڈاکٹر حمیر اخلیل":207,"ڈاکٹر سعید الرحمن / ڈاکٹر عبد السلام":480,"رحمت اللہ اچک زئی":25,"ڈاکٹر مقبول ح":483,"ڈاکٹر مقبول گیلانی":483,"ڈاکٹر مقبول حسن":483,"حافظ مقبول":18,"ڈاکٹر عمیر احمد صدیقی":332,"ڈاکٹر عبد الوہاب":314,"محمد ذوالقرنین":74,"ڈاکٹر شیث اسماعیل اعظمی":261,"ڈاکٹر حسین فاروق اسلامیہ کالج پشاور 2012-17ء":203,"ڈاکٹر عبد القادر سلیمان ازہری":305,"ضیاء المصطفی مکی":43,"حافظ طاہر المصطفی":417,"ڈاکٹر محمد طاہر مصطفے":417,"ڈاکٹر طاہر مصطفے":417,"مولانا غلام مصطفی قاسمی":102,"صاحب زادہ محمد عتیق حیدر":266,"ڈاکٹر صاحب زادہ محمد عتیق حیدر":266,"ڈاکٹر محمد عتیق حیدر":266,"محمد عتیق حیدر":266,"صاحبزادہ محمد عتیق حیدر":266,"ڈاکٹر عبد الشہید نعمانی":429,"وجیہہ الدین نعمانی":109,"محمد وجیہہ الدین نعمان":109,"وجیہہ الدین":109,"ڈاکٹر حمیر احمد":205,"ڈاکٹر حمیر اشرف":206,"عبد الحی صدیقی":47,"ڈاکٹر ابو الوفاء محمود":120,"عتیق احمد":57,"محمد اسلم ملک":369,"کوثر خالد":98,"حافظ محمد اسلم بورے والا":14,"ڈاکٹر محمد سلطان کھوکھر":467,"ڈاکٹر محمد عمر فاروق":437,"ڈاکٹر محمد شہباز حسن":193,"ڈاکٹر نعیم انور":451,"ڈاکٹر نعیم انور نعمانی":451,"حافظ سرفراز احمد اعوان":222,"ڈاکٹر محمد اکرم اللہ":383,"رانا محمد اکرم قادری":384,"ڈاکٹر کلیم اللہ خان نیازی":513,"ڈاکٹر کلیم اللہ":513,"ڈاکٹر حافظ محمد طاہر":416,"ڈاکٹر محمد اختر سعید":358,"ڈاکٹر اختر سعید صدیقی":358,"محمد سعد صدیقی":405,"ڈاکٹر نعیم صدیقی":452,"ڈاکٹر ناصر صدیقی":493,"عبد الحئ صدیقی":47,"محمد ظہیر احمد صدیقی":424,"ڈاکٹر ظہیر احمد صدیقی":424,"ڈاکٹر عبد الخالق خان":285,"ڈاکٹر اشتیاق احمد":127,"ڈاکٹر محمد اشتیاق":127,"ڈاکٹر حمیرہ خلیل":207,"عبد الطاہر":100,"رحمت اللہ":25,"ڈاکٹر قاضی مجیب الرحمن":353,"شبیر احمد":254,"سبین":88,"ڈاکٹر ناہید":495,"ڈاکٹر عبد الستار نیازی":297,"ڈاکٹر احمد اقبال":122,"ڈاکٹر سید شاہد ترمذی":249,"غلام اللہ خان":333,"ڈاکٹر ظفر حسین":171,"ڈاکٹر ظفر حسین ظفر شعبہ اردو":276,"ڈاکٹر احمد جان":123,"سباؤن":87,"ناصحہ":90,"ڈاکٹر حفاظت اللہ":163,"ڈاکٹر محمد التماس خان":482,"ڈاکٹر مفتی محمد التماس":482,"ڈاکٹر محمد ظہیر احمد":424,"حافظ ظہیر احمد الاسنادی":78,"ڈاکٹر شفاعت علی بغدادی":257,"رفعت نواز":92,"ڈاکٹر حافظ عبد البا سط خان":478,"سعید الرحمن":99,"مسز مد ثر حمید":96,"ڈاکٹر طاہر اسلام عسکری":170,"علی اکبر قادری الازہری":328,"حافظ نذیر احمد":19,"ڈاکٹر محمود عبد اللہ":464,"ڈاکٹر حافظ سلطان محمود":10,"ڈاکٹر حافظ سلطان محمود کھوکھر":10,"ڈاکٹر طاہر ملک":418,"ڈاکٹر عمران الحق کلیانوی":481,"ڈاکٹر مفتی عمران الحق":481,"ڈاکٹر حافظ انس نفر":158,"سعید احمد اکبر آبادی":224,"ڈاکٹر زین الساجدین صدیقی":351,"ڈاکٹر مدثر احد":469,"ڈاکٹر عبد الرحمن":289,"ڈاکٹر عائشہ":278,"ڈاکٹر کرم حسین وٹو":511,"ڈاکٹر عرفان خالد":318,"ڈاکٹر سید سعید اللہ":230,"ڈاکٹر سلیمہ خان":234,"اظہر عباسی":69,"محمد عباس نقش بندی":80,"محب اللہ":82,"ڈاکٹر محمد تاج الدین":390,"صاحب زادہ محمد عقیق حیدر":266,"ڈاکٹر ممتاز الح":447,"ڈاکٹر محمد نسیم":502,"ڈاکٹر عبد اللہ صالح":430,"ڈاکٹر اسحاق مدنی":364,"ڈاکٹر عبد الحی مدنی":280,"شمیم وریم":36,"شمیم و ریام":36,"مسز شمیم وریام":36,"ڈاکٹر احسان الرحمن":121,"علم الدین سالک":111,"علاؤالدین":325,"ڈاکٹر حمود اختر":198,"ڈاکٹر عبد اللہ عبد القادر":398,"محمودہ عارف وائیں":86,"ڈاکٹر محمد ادریس اودھی":359,"ڈاکٹر منزہ nحیات":487,"ڈاکٹر اکرم رانا":384,"ڈاکٹر محمد اکرام رانا":384,"ڈاکٹر سعید الرحمان":479,"مسز مدحت حمید":96,"ڈاکٹر حیات خان":508,"ڈاکٹر ضیاء اللہ":272,"ڈاکٹر قاری محمد رفیق":348,"ڈاکٹر محمد رفیق":348,"ڈاکٹر سلیم شاہ":408,"ڈاکٹر تاج افسر":346,"فخر زمان":62,"حافظ اصغر":15,"ڈاکٹر باد شاہ رحمن":137,"ڈاکٹر محمد صغیر حسین":414,"ڈاکٹر صغیر حسن معصومی":414,"عبد الشکور ظہیر":298,"ڈاکٹر ار شد منیر لغاری":126,"ڈاکٹر شار محمد":499,"ڈاکٹر اسلم خان":368,"اسلم خان":368,"اسلم خان مروت":368,"ڈاکٹر ابوالفتح محمد صغیر الدین":118,"ڈاکٹر ابوطاہر خان":117,"ڈاکٹر اختر":125,"ڈاکٹر اصغر علی چشتی":327,"ڈاکٹر اظہار خان":117,"ڈاکٹر انور علی طیبی":134,"ڈاکٹر عرفان اللہ خان":317,"ڈاکٹر ذوالفقار ملک":210,"ڈاکٹر زرنور بیگم":214,"ڈاکٹر سلمہ محمود":233,"ڈاکٹر سید غضنفر":245,"ڈاکٹر شمر فاطمہ":142,"ڈاکٹر شمر فاطمہ مسعود":142,"ڈاکٹر شمار احمد":497,"ڈاکٹر صاحب زادہ محمد":264,"ڈاکٹر ضیاء اللہ نور الحق الازہری":272,"ڈاکٹر انوار الحق":272,"ڈاکٹر طاہر بشارت":273,"ڈاکٹر عبد الواحد جے- ہالیپوتہ":313,"ڈاکٹر فضل الرحمن":341,"ڈاکٹر عظمی":321,"ڈاکٹر فضل الی خان":342,"ڈاکٹر فضل ہادی":342,"ڈاکٹر قاری ابوالح":345,"ڈاکٹر کلثوم سعید":512,"ڈاکٹر گجر غزل خان کا شمیری":514,"ڈاکٹر محمد زبیر":403,"ڈاکٹر نیا محمد":510,"رؤفہ اقبال":24,"زقیہ بانو":26,"سعید الحق جدون":228,"عبد الظاہر":100,"فریدہ کاکٹر":64,"قاری محمد فیاض":443,"محمد شریف":76,"محمد عطاء الہی سراج":81,"محمد نعیم بشیر":83,"مولا نا منتخب الحق":104,"ڈاکٹر ابوالحسن بشیر":344,"امتیاز احمد":3,"علامہ ڈاکٹر سید مجتبی حسن کامونپوری":246,"سید افتخار گیلانی":31,"عبد اللہ خان":431,"ڈاکٹر محمد باقر خان خاکونی":389,"ضیاء الرحمان ضیاء":42,"ڈاکٹر توقیر علم فلاحی":141,"سناء ضیاء":4,"ڈاکٹر حافظ فداء حسین":183,"حافظ محمد ارشد":13,"ڈاکٹر حافظ صلاح الدین":168,"نایید علی زئی":106,"ڈاکٹر محمد شہباز منبج":411,"ڈاکٹر محمد عابد نعیم":425,"ڈاکٹر محمد شہاز منج":411,"ڈاکٹر محمد شہباز منہج":411,"ڈاکٹر مشاق احمد":473,"ڈاکٹر عظمی بیگم":321,"عظمی شہزادی":58,"ڈاکٹر عظمی پروین":322,"ڈاکٹر محمد سرفراز خان":404,"حافظ محمد دین":6,"ڈاکٹر محمد ظہیر الحق":371,"ڈاکٹر محمد انیس":382,"ڈاکٹر ابو الفتح محمد محمد صغیر الدین":118,"عنایت اللہ چوھدری":61};
+var DEGREES = ["BS","BA Honors","MA","MS","MPhil","MPhil leading to PhD","PhD","Post-Doctorate"];
+var rowSeq = 0, extras = {}, ctx = {u:'', d:''};
+var TITLES = {'ڈاکٹر':1,'حافظ':1,'مفتی':1,'مولانا':1,'قاری':1,'مس':1,'مسز':1,'پروفیسر':1,'سید':1};
+
+function $(id){return document.getElementById(id);}
+function esc(s){return (s||'').toString().replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function sp(s){return (s||'').toString().replace(/\s+/g,' ').trim();}
+function fixChars(s){return s.replace(/[\u064B-\u065F\u0670]/g,'').replace(/ي|ى/g,'ی').replace(/ك/g,'ک').replace(/ة|ۃ/g,'ہ').replace(/[\u200c\u200d\u200e\u200f]/g,'').replace(/\u00a0/g,' ');}
+
+/* سپروائزر کے نام کی Normalization — موجودہ Normalized فائل کی شکل کے مطابق */
+function normSup(raw){
+  var s=fixChars((raw||'').toString());
+  s=s.replace(/(^|\s)dr\.?(?=\s|$)/gi,'$1ڈاکٹر');
+  s=s.replace(/[.,،؛;:()\[\]"'«»]/g,' ');
+  s=sp(s);
+  s=s.replace(/(^|\s)عبد(?=ال\S)/g,'$1عبد ');
+  return s;
+}
+function skey(s){return normSup(s).replace(/\s/g,'');}
+function sortKey(n){var w=n.split(' ');while(w.length>1&&TITLES[w[0]])w.shift();return w.join(' ');}
+var UR_ORDER='اآبپتٹثجچحخدڈذرڑزژسشصضطظعغفقکگلمنںوہھیے';
+var UR_EQ={'أ':'ا','إ':'ا','ٱ':'ا','ٲ':'ا','ؤ':'و','ئ':'ی','ي':'ی','ى':'ی','ې':'ی','ك':'ک','ه':'ہ','ة':'ہ','ۃ':'ہ','ۀ':'ہ'};
+function urKey(c){c=UR_EQ[c]||c;var i=UR_ORDER.indexOf(c);if(i>=0)return 1000+i;return /[A-Za-z0-9]/.test(c)?5000+c.charCodeAt(0):1;}
+function urCmp(a,b){
+  a=normText(a);b=normText(b);
+  for(var i=0;i<Math.min(a.length,b.length);i++){var x=urKey(a.charAt(i)),y=urKey(b.charAt(i));if(x!==y)return x-y;}
+  return a.length-b.length;
+}
+function faSort(a,b){return urCmp(sortKey(a),sortKey(b));}
+
+function normYear(raw){
+  var v=(raw||'').toString().trim();
+  if(!v)return {clean:'',ok:true};
+  var fours=v.match(/\d{4}/g);
+  if(fours&&fours.length>=2)return {clean:fours[0]+'-'+fours[1],ok:true};
+  if(fours&&fours.length===1)return {clean:fours[0],ok:true};
+  var twos=v.match(/\d{2}/g);
+  if(twos&&twos.length)return {clean:v.replace(/[^\d]+/g,'-').replace(/^-|-$/g,''),ok:false};
+  return {clean:v,ok:false};
+}
+
+/* ---------- ڈیٹا تک رسائی ---------- */
+var STORE_KEY='SM_FORM_LISTS_V1', addU=[], addD={}, carry=[], ren={}, del=[];
+function loadStore(){try{var o=JSON.parse(localStorage.getItem(STORE_KEY)||'{}');addU=o.u||[];addD=o.d||{};extras=o.s||{};ren=o.r||{};del=o.x||[];}catch(e){}
+  try{var t=localStorage.getItem(DB_KEY);if(t){var j=JSON.parse(t);DBX=j.data;DBMETA=j.meta;}}catch(e){}}
+function saveStore(){try{localStorage.setItem(STORE_KEY,JSON.stringify({u:addU,d:addD,s:extras,r:ren,x:del}));}catch(e){}}
+/* نام کی عمومی Normalization: فالتو خالی جگہیں، عربی حروف، "،" کے ارد گرد فاصلہ */
+function normText(s){return sp(fixChars((s||'').toString())).replace(/\s*،\s*/g,'، ').replace(/^،\s*|،\s*$/g,'').trim();}
+function nkey(s){return normText(s).replace(/[\s،]/g,'');}
+function resolveName(list,raw){var t=normText(raw);if(!t)return '';var k=nkey(t);for(var i=0;i<list.length;i++){if(nkey(list[i])===k)return list[i];}return t;}
+function uniq(a){var seen={};return a.filter(function(n){if(!n||seen[n])return false;seen[n]=1;return true;});}
+
+function bk(u){for(var k in ren){if(ren.hasOwnProperty(k)&&ren[k]===u)return k;}return u;}
+function univList(){
+  var base=Object.keys(BASE()||EMB).filter(function(k){return del.indexOf(k)<0;}).map(function(k){return ren.hasOwnProperty(k)?ren[k]:k;});
+  return uniq(base.concat(addU)).sort(urCmp);
+}
+function deptList(u){
+  var a=[],bu=bk(u),B=BASE();
+  if(B){if(B[bu]&&B[bu].depts)a=B[bu].depts.slice();}
+  else if(EMB[bu])a=EMB[bu].d.slice();
+  return uniq(a.concat(addD[u]||[])).sort(urCmp);
+}
+function supList(u,d){
+  var names=[],bu=bk(u),B=BASE(),o=B&&B[bu]&&B[bu].supervisors;
+  if(o){
+    if(o[d]&&o[d].length)names=o[d].slice();
+    else Object.keys(o).forEach(function(k){names=names.concat(o[k]);});
+  }
+  if(!names.length&&!B&&EMB[bu])names=EMB[bu].s.map(function(i){return SUPS[i];});
+  names=names.concat(extras[u+'\u0001'+d]||[],extras[u+'\u0001*']||[]);
+  return uniq(names).sort(faSort);
+}
+function getDept(){var v=$('fDept').value;return v==='__other__'?'':v;}
+function resolveSup(raw){
+  var x=normSup(raw);if(!x)return '';
+  var list=supList(ctx.u,ctx.d),k=x.replace(/\s/g,'');
+  for(var i=0;i<list.length;i++){if(skey(list[i])===k)return list[i];}
+  if(RAWMAP.hasOwnProperty(x))return SUPS[RAWMAP[x]];
+  return x;
+}
+
+/* ---------- یونیورسٹی / شعبہ ---------- */
+function buildUnivOptions(){
+  var sel=$('fUniv'),cur=sel.value,l=univList();
+  sel.innerHTML='<option value="">— منتخب کریں —</option>'+l.map(function(u){return '<option value="'+esc(u)+'">'+esc(u)+'</option>';}).join('')+'<option value="__new__">➕ فہرست میں نہیں / نئی یونیورسٹی</option>';
+  if(cur&&(cur==='__new__'||l.indexOf(cur)>=0))sel.value=cur;
+  $('univCnt').textContent='('+l.length+')';
+}
+function buildDeptOptions(u){
+  var dSel=$('fDept');
+  $('fDeptNew').value='';$('fDeptNew').classList.add('hidden-inline');
+  if(!u){dSel.disabled=true;dSel.innerHTML='<option value="">پہلے یونیورسٹی منتخب کریں</option>';return;}
+  dSel.disabled=false;
+  dSel.innerHTML='<option value="">— منتخب کریں —</option>'+deptList(u).map(function(x){return '<option value="'+esc(x)+'">'+esc(x)+'</option>';}).join('')+'<option value="__other__">➕ فہرست میں نہیں / نیا شعبہ</option>';
+}
+function onUnivChange(){
+  var v=$('fUniv').value,isNew=v==='__new__';
+  $('fUnivNew').classList.toggle('hidden-inline',!isNew);
+  if(isNew)$('fUnivNew').focus();else $('fUnivNew').value='';
+  buildDeptOptions(isNew?'':v);
+  setCtx();
+}
+function commitUniv(){
+  if($('fUniv').value!=='__new__')return;
+  var name=resolveName(univList(),$('fUnivNew').value);
+  if(!name){$('fUniv').value='';onUnivChange();return;}
+  if(univList().indexOf(name)<0){addU.push(name);saveStore();}
+  buildUnivOptions();$('fUniv').value=name;onUnivChange();
+}
+/* ---------- یونیورسٹیاں Edit / Delete ---------- */
+var DB_KEY='SM_FORM_DB_V1', DBX=null, DBMETA=null;
+function BASE(){return DBX||OLD||EMBD;}
+var ADMIN_HASH='cbbdafa2f8dcb9b7079eba01abb7c96a47b27870676d04f103c462c6517cb40a';
+function sha256(s){
+  function rr(n,x){return (x>>>n)|(x<<(32-n));}
+  var K=[],H=[],n=0,c,i,j;
+  function isP(v){for(var q=2;q*q<=v;q++)if(v%q===0)return false;return true;}
+  for(c=2;n<64;c++){if(isP(c)){if(n<8)H[n]=(Math.pow(c,.5)%1*4294967296)|0;K[n++]=(Math.pow(c,1/3)%1*4294967296)|0;}}
+  s=unescape(encodeURIComponent(s));
+  var l=s.length,w=[];
+  for(i=0;i<l;i++)w[i>>2]|=s.charCodeAt(i)<<(24-(i%4)*8);
+  w[l>>2]|=0x80<<(24-(l%4)*8);
+  w[(((l+8)>>6)+1)*16-1]=l*8;
+  var h=H.slice();
+  for(j=0;j<w.length;j+=16){
+    var a=h.slice(),x=[];
+    for(i=0;i<64;i++){
+      if(i<16)x[i]=w[j+i]|0;
+      else{var g0=x[i-15],g1=x[i-2];x[i]=(x[i-16]+(rr(7,g0)^rr(18,g0)^(g0>>>3))+x[i-7]+(rr(17,g1)^rr(19,g1)^(g1>>>10)))|0;}
+      var t1=(a[7]+(rr(6,a[4])^rr(11,a[4])^rr(25,a[4]))+((a[4]&a[5])^(~a[4]&a[6]))+K[i]+x[i])|0;
+      var t2=((rr(2,a[0])^rr(13,a[0])^rr(22,a[0]))+((a[0]&a[1])^(a[0]&a[2])^(a[1]&a[2])))|0;
+      a=[(t1+t2)|0,a[0],a[1],a[2],(a[3]+t1)|0,a[4],a[5],a[6]];
+    }
+    for(i=0;i<8;i++)h[i]=(h[i]+a[i])|0;
+  }
+  return h.map(function(v){return ('00000000'+(v>>>0).toString(16)).slice(-8);}).join('');
+}
+function pwHash(p){return sha256(p+'|SMIRI');}
+function curHash(){try{return localStorage.getItem('SM_ADMIN_H')||ADMIN_HASH;}catch(e){return ADMIN_HASH;}}
+var admFails=0,admLockUntil=0,admKind='';
+function openAdmin(){
+  $('admPw').value='';$('admErr').style.display='none';
+  $('admGate').classList.remove('hidden-inline');$('admMain').classList.add('hidden-inline');
+  $('admOv').classList.add('open');setTimeout(function(){$('admPw').focus();},50);
+}
+function closeAdmin(){$('admOv').classList.remove('open');$('admMain').classList.add('hidden-inline');$('admPw').value='';$('admMsg').textContent='';}
+function admLogin(){
+  var now=Date.now(),e=$('admErr');
+  if(now<admLockUntil){e.style.display='block';e.textContent='کئی غلط کوششیں — '+Math.ceil((admLockUntil-now)/1000)+' سیکنڈ بعد دوبارہ کوشش کریں۔';return;}
+  if(pwHash($('admPw').value)===curHash()){
+    admFails=0;$('admPw').value='';e.style.display='none';
+    $('admGate').classList.add('hidden-inline');$('admMain').classList.remove('hidden-inline');updateDbStatus();
+  }else{
+    admFails++;e.style.display='block';e.textContent='پاس ورڈ درست نہیں۔';
+    if(admFails>=5){admLockUntil=Date.now()+30000;admFails=0;}
+    $('admPw').value='';
+  }
+}
+/* ---- ایک ہی DB / JSON فائل سے یونیورسٹی، شعبہ اور سپروائزر کی فہرستیں ---- */
+function pick(o,keys){if(!o||typeof o!=='object')return '';for(var i=0;i<keys.length;i++){var v=o[keys[i]];if(typeof v==='string'&&v.trim())return v;}return '';}
+var K_U=['university','univ','University','یونیورسٹی'],K_D=['dept','department','Department','شعبہ'],K_S=['supervisor','Supervisor','sup','سپروائزر'];
+function isMapFile(d){return d&&typeof d==='object'&&!Array.isArray(d)&&d.university&&typeof d.university==='object'&&!Array.isArray(d.university)&&(d.department||d.supervisor);}
+function okName(t){return !!t&&t!=='–'&&t!=='-';}
+function buildDataset(data){
+  var out={},skipped=[];
+  function U(u){return out[u]||(out[u]={depts:[],supervisors:{}});}
+  function addDept(u,x){U(u);if(out[u].depts.indexOf(x)<0)out[u].depts.push(x);}
+  function addSup(u,dp,x){U(u);var k=dp||'*',l=out[u].supervisors[k]=out[u].supervisors[k]||[];if(l.indexOf(x)<0)l.push(x);}
+  if(isMapFile(data)){
+    var um={};Object.keys(data.university).forEach(function(k){um[sp(k)]=sp(data.university[k]);});
+    var canon=function(u){u=sp(u);return um.hasOwnProperty(u)?um[u]:u;};
+    var splitKey=function(k){var i=k.indexOf('\u0001'),n=1;if(i<0){i=k.indexOf('|||');n=3;}return i<0?['',k]:[k.slice(0,i),k.slice(i+n)];};
+    Object.keys(data.department||{}).forEach(function(k){var u=canon(splitKey(k)[0]),v=sp(data.department[k]);if(u&&okName(v))addDept(u,v);});
+    Object.keys(data.supervisor||{}).forEach(function(k){var u=canon(splitKey(k)[0]),v=sp(data.supervisor[k]);if(u&&okName(v))addSup(u,'',v);});
+    Object.keys(um).forEach(function(k){var t=um[k];if(okName(t)&&!out[t]&&skipped.indexOf(t)<0)skipped.push(t);});
+  }else{
+    var arr=Array.isArray(data)?data:(data&&(data.records||data.data||data.theses||data.items));
+    if(Array.isArray(arr)&&arr.length&&typeof arr[0]==='object'){
+      arr.forEach(function(r){
+        var u=sp(pick(r,K_U)),dp=sp(pick(r,K_D)),sv=sp(pick(r,K_S));
+        if(!okName(u))return;
+        U(u);if(okName(dp))addDept(u,dp);if(okName(sv))addSup(u,okName(dp)?dp:'',sv);
+      });
+    }else if(data&&typeof data==='object'&&!Array.isArray(data)){
+      Object.keys(data).forEach(function(u){
+        var v=data[u];if(!v||typeof v!=='object'||Array.isArray(v)||!(v.depts||v.supervisors))return;
+        var uu=sp(u);if(!okName(uu))return;U(uu);
+        (v.depts||[]).forEach(function(x){x=sp(x);if(okName(x))addDept(uu,x);});
+        Object.keys(v.supervisors||{}).forEach(function(dk){(v.supervisors[dk]||[]).forEach(function(x){x=sp(x);if(okName(x))addSup(uu,dk==='*'?'':sp(dk),x);});});
+      });
+    }
+  }
+  return Object.keys(out).length?{data:out,skipped:skipped}:null;
+}
+function refreshAll(){
+  var u=ctx.u,d=$('fDept').value;
+  buildUnivOptions();
+  if(u&&univList().indexOf(u)>=0){
+    $('fUniv').value=u;buildDeptOptions(u);
+    if(d&&d!=='__other__'&&deptList(u).indexOf(d)>=0)$('fDept').value=d;
+  }else{$('fUniv').value='';buildDeptOptions('');}
+  setCtx();updateDbStatus();
+}
+function updateDbStatus(){
+  var n=univList().length,t;
+  if(DBX)t='موجودہ ڈیٹا: اپ لوڈ شدہ فائل «'+((DBMETA&&DBMETA.name)||'')+'»'+((DBMETA&&DBMETA.at)?' ('+DBMETA.at+')':'')+' — '+n+' یونیورسٹیاں';
+  else if(OLD)t='موجودہ ڈیٹا: univ-data.js فائل — '+n+' یونیورسٹیاں';
+  else t='موجودہ ڈیٹا: پروگرام کا اپنا (Built-in) ڈیٹا — '+n+' یونیورسٹیاں';
+  $('admStatus').textContent=t;
+  $('admDbDel').style.display=DBX?'':'none';
+}
+function resetLocalLists(){addU=[];addD={};extras={};ren={};del=[];saveStore();}
+/* SQLite (.db) فائل کا مختصر Reader — صرف thesis ٹیبل کے یونیورسٹی/شعبہ/سپروائزر کالم نکالتا ہے، باقی کالم رکھے ہی نہیں جاتے */
+function sqliteRecords(buf){
+  var dv=new DataView(buf),u8=new Uint8Array(buf),dec=new TextDecoder('utf-8');
+  var ps=dv.getUint16(16);if(ps===1)ps=65536;
+  var usable=ps-u8[20];
+  if(dv.getUint32(56)!==1)throw new Error('صرف UTF-8 SQLite فائل قابلِ قبول ہے');
+  function vint(a,p){var v=0,i,b;for(i=0;i<8;i++){b=a[p+i];v=v*128+(b&127);if(!(b&128))return [v,i+1];}return [v*256+a[p+8],9];}
+  function payload(p){
+    var a=vint(u8,p),P=a[0],q=p+a[1];q+=vint(u8,q)[1];
+    var X=usable-35;
+    if(P<=X)return u8.subarray(q,q+P);
+    var M=Math.floor((usable-12)*32/255)-23,K=M+((P-M)%(usable-4)),L=K<=X?K:M;
+    var out=new Uint8Array(P),got=L,next=dv.getUint32(q+L);
+    out.set(u8.subarray(q,q+L),0);
+    while(next&&got<P){var off=(next-1)*ps,take=Math.min(usable-4,P-got);out.set(u8.subarray(off+4,off+4+take),got);got+=take;next=dv.getUint32(off);}
+    return out;
+  }
+  function record(a){
+    var hs=vint(a,0),hl=hs[0],p=hs[1],types=[],t,i,pos,vals=[],n,v,k;
+    while(p<hl){t=vint(a,p);types.push(t[0]);p+=t[1];}
+    pos=hl;
+    for(i=0;i<types.length;i++){
+      t=types[i];v=null;n=0;
+      if(t>=1&&t<=6){n=[0,1,2,3,4,6,8][t];v=0;for(k=0;k<n;k++)v=v*256+a[pos+k];if(a[pos]&128)v-=Math.pow(2,8*n);}
+      else if(t===7){n=8;v=new DataView(a.buffer,a.byteOffset+pos,8).getFloat64(0);}
+      else if(t===8)v=0;else if(t===9)v=1;
+      else if(t>=12){n=(t-((t%2)?13:12))/2;v=(t%2)?dec.decode(a.subarray(pos,pos+n)):null;}
+      vals.push(v);pos+=n;
+    }
+    return vals;
+  }
+  function walk(pg,fn){
+    var off=(pg-1)*ps,h=off+(pg===1?100:0),type=u8[h],n=dv.getUint16(h+3),i;
+    if(type===13){for(i=0;i<n;i++)fn(payload(off+dv.getUint16(h+8+i*2)));}
+    else if(type===5){for(i=0;i<n;i++)walk(dv.getUint32(off+dv.getUint16(h+12+i*2)),fn);walk(dv.getUint32(h+8),fn);}
+  }
+  var root=0,sql='';
+  walk(1,function(a){var v=record(a);if(v[0]==='table'&&(v[1]==='thesis'||v[1]==='theses')&&!root){root=v[3];sql=v[4]||'';}});
+  if(!root)throw new Error('فائل میں thesis ٹیبل نہیں ملا');
+  var cols=sql.slice(sql.indexOf('(')+1,sql.lastIndexOf(')')).split(',').map(function(x){return x.trim().split(/\s+/)[0].replace(/["'`\[\]]/g,'').toLowerCase();});
+  function ix(names){for(var i=0;i<names.length;i++){var j=cols.indexOf(names[i]);if(j>=0)return j;}return -1;}
+  var iu=ix(['university','univ']),id=ix(['dept','department']),is=ix(['supervisor','sup']);
+  if(iu<0||is<0)throw new Error('university / supervisor کالم نہیں ملے');
+  var recs=[];
+  walk(root,function(a){var v=record(a);recs.push({university:v[iu]||'',dept:id>=0?(v[id]||''):'',supervisor:v[is]||''});});
+  return recs;
+}
+function parseDbBuffer(buf){
+  var data,isSql=buf.byteLength>16;
+  if(isSql){var head=new Uint8Array(buf,0,15),mg='SQLite format 3';for(var q=0;q<15;q++){if(head[q]!==mg.charCodeAt(q)){isSql=false;break;}}}
+  if(isSql)data=sqliteRecords(buf);
+  else{
+    var t=new TextDecoder('utf-8').decode(new Uint8Array(buf)).replace(/^\uFEFF/,'');
+    var i2=t.search(/[\[{]/),j=Math.max(t.lastIndexOf(']'),t.lastIndexOf('}'));
+    data=JSON.parse(t.slice(i2,j+1));
+  }
+  var total=Array.isArray(data)?data.length:((data&&(data.records||data.data||data.theses||data.items))||[]).length||0;
+  return {res:buildDataset(data),total:total};
+}
+function dsCounts(ds){
+  var nd=0,sset={};
+  Object.keys(ds).forEach(function(u){nd+=ds[u].depts.length;Object.keys(ds[u].supervisors).forEach(function(k){ds[u].supervisors[k].forEach(function(x){sset[x]=1;});});});
+  return {u:Object.keys(ds).length,d:nd,s:Object.keys(sset).length};
+}
+function findN(list,x){var k=nkey(x);for(var i=0;i<list.length;i++){if(nkey(list[i])===k)return list[i];}return '';}
+function mergeDS(dst,src){
+  Object.keys(src).forEach(function(u){
+    var du=findN(Object.keys(dst),u)||u,t=dst[du]||(dst[du]={depts:[],supervisors:{}});
+    src[u].depts.forEach(function(x){if(!findN(t.depts,x))t.depts.push(x);});
+    Object.keys(src[u].supervisors).forEach(function(k){
+      var dk=k==='*'?'*':(findN(t.depts,k)||k),l=t.supervisors[dk]=t.supervisors[dk]||[];
+      src[u].supervisors[k].forEach(function(x){if(!findN(l,x))l.push(x);});
+    });
+  });
+}
+function useDataset(ds,name){
+  DBX=ds;DBMETA={name:name,at:new Date().toISOString().slice(0,10)};
+  var saved=true;try{localStorage.setItem(DB_KEY,JSON.stringify({meta:DBMETA,data:DBX}));}catch(e){saved=false;}
+  resetLocalLists();refreshAll();
+  return saved;
+}
+function readDbFile(file){
+  var fr=new FileReader();
+  fr.onload=function(){
+    var p;
+    try{p=parseDbBuffer(fr.result);}catch(e){$('admMsg').textContent='⚠ فائل پڑھی نہیں جا سکی (SQLite .db یا JSON ہونی چاہیے): '+((e&&e.message)||'');return;}
+    if(!p.res){$('admMsg').textContent='⚠ فائل میں یونیورسٹی / شعبہ / سپروائزر کا ڈیٹا نہیں ملا۔';return;}
+    var saved=useDataset(p.res.data,file.name),c=dsCounts(DBX);
+    $('admMsg').textContent='✔ فائل لوڈ ہو گئی'+(p.total?' ('+p.total+' ریکارڈ پڑھے گئے)':'')+' — '+c.u+' یونیورسٹیاں، '+c.d+' شعبے، '+c.s+' سپروائزر۔ صرف یونیورسٹی → شعبہ → سپروائزر رکھا گیا ہے۔'+(saved?'':' ⚠ براؤزر میں محفوظ نہیں ہو سکی۔');
+  };
+  fr.readAsArrayBuffer(file);
+}
+function extractFiles(files){
+  var list=Array.prototype.slice.call(files),i=0,merged={},ok=0,fail=[],total=0;
+  function finish(){
+    if(!ok){$('admMsg').textContent='⚠ کوئی فائل پڑھی نہ جا سکی۔ ناکام: '+fail.join(' | ');return;}
+    var saved=useDataset(merged,ok+' فائلیں'),c=dsCounts(DBX);
+    $('admMsg').textContent='✔ '+ok+' فائلوں سے Extract مکمل'+(total?' ('+total+' ریکارڈ پڑھے گئے)':'')+' — '+c.u+' یونیورسٹیاں، '+c.d+' شعبے، '+c.s+' سپروائزر۔'+(fail.length?' ⚠ ناکام: '+fail.join(' | ')+'۔':'')+' اب "univ-data.js ڈاؤن لوڈ" دبائیں۔'+(saved?'':' ⚠ براؤزر میں محفوظ نہیں ہو سکی۔');
+  }
+  (function next(){
+    if(i>=list.length)return finish();
+    var f=list[i++],fr=new FileReader();
+    $('admMsg').textContent='⏳ '+i+' / '+list.length+' — '+f.name;
+    fr.onload=function(){
+      try{var p=parseDbBuffer(fr.result);if(p.res){mergeDS(merged,p.res.data);ok++;total+=p.total;}else fail.push(f.name);}catch(e){fail.push(f.name);}
+      setTimeout(next,0);
+    };
+    fr.onerror=function(){fail.push(f.name);setTimeout(next,0);};
+    fr.readAsArrayBuffer(f);
+  })();
+}
+function deleteDb(){
+  if(!DBX)return;
+  if(!confirm('اپ لوڈ شدہ DB/JSON فائل کا ڈیٹا حذف کر دیا جائے؟ فہرستیں پروگرام کے اپنے ڈیٹا پر واپس چلی جائیں گی، اور اس براؤزر کی Edit/Delete/نئے اندراجات والی تبدیلیاں بھی صاف ہو جائیں گی۔'))return;
+  DBX=null;DBMETA=null;try{localStorage.removeItem(DB_KEY);}catch(e){}
+  resetLocalLists();refreshAll();
+  $('admMsg').textContent='✔ اپ لوڈ شدہ فائل حذف ہو گئی۔';
+}
+function download(name,text,type){
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type}));a.download=name;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(a.href);},4000);
+}
+function exportLists(){
+  var o={};
+  univList().forEach(function(u){
+    var sv={};deptList(u).forEach(function(x){sv[x]=supList(u,x);});
+    var all=supList(u,'');if(all.length)sv['*']=all;
+    o[u]={depts:deptList(u),supervisors:sv};
+  });
+  download('univ-data.js','/* SM Islamic Research Index — universities / departments / supervisors */\nwindow.UNIV_DATA='+JSON.stringify(o)+';\n','application/javascript');
+}
+function openMng(){mngEdit='';$('mngSearch').value='';renderMng();$('mngOv').classList.add('open');}
+var mngEdit='';
+function renameUniv(cur,nn){
+  nn=normText(nn);
+  if(!nn||nn===cur)return true;
+  var k=nkey(nn);
+  if(univList().some(function(x){return x!==cur&&nkey(x)===k;})){alert('یہ نام پہلے سے موجود ہے: '+nn);return false;}
+  var ai=addU.indexOf(cur);
+  if(ai>=0)addU[ai]=nn;else{var o=bk(cur);if(nn===o)delete ren[o];else ren[o]=nn;}
+  if(addD[cur]){addD[nn]=uniq((addD[nn]||[]).concat(addD[cur]));delete addD[cur];}
+  Object.keys(extras).forEach(function(key){
+    var i=key.indexOf('\u0001');
+    if(key.slice(0,i)===cur){var nk=nn+key.slice(i);extras[nk]=uniq((extras[nk]||[]).concat(extras[key]));delete extras[key];}
+  });
+  carry.forEach(function(r){if(r.university===cur)r.university=nn;});
+  saveStore();
+  var wasSel=$('fUniv').value===cur,d=$('fDept').value;
+  buildUnivOptions();
+  if(wasSel){
+    $('fUniv').value=nn;onUnivChange();
+    if(d&&d!=='__other__'&&deptList(nn).indexOf(d)>=0){$('fDept').value=d;setCtx();}
+  }
+  return true;
+}
+function deleteUniv(u){
+  var n=carry.filter(function(r){return r.university===u;}).length;
+  var msg='کیا آپ واقعی "'+u+'" کو Delete کرنا چاہتے ہیں؟\n\nاس کے شعبے اور اس کے لیے شامل کیے گئے سپروائزر بھی فہرست سے ہٹ جائیں گے۔';
+  if(n)msg+='\nاپ لوڈ شدہ '+n+' اندراجات بھی ہٹا دیے جائیں گے۔';
+  if(!confirm(msg))return false;
+  var ai=addU.indexOf(u);
+  if(ai>=0)addU.splice(ai,1);else{var o=bk(u);delete ren[o];if(del.indexOf(o)<0)del.push(o);}
+  delete addD[u];
+  Object.keys(extras).forEach(function(key){if(key.slice(0,key.indexOf('\u0001'))===u)delete extras[key];});
+  carry=carry.filter(function(r){return r.university!==u;});showCarry();
+  saveStore();
+  var wasSel=$('fUniv').value===u;
+  buildUnivOptions();
+  if(wasSel){$('fUniv').value='';onUnivChange();}
+  return true;
+}
+function renderMng(){
+  var q=nkey($('mngSearch').value),l=univList().filter(function(u){return !q||nkey(u).indexOf(q)>=0;});
+  $('mngCnt').textContent='('+univList().length+')';
+  $('mngList').innerHTML=l.map(function(u,i){
+    return '<div class="mng-item" data-u="'+esc(u)+'">'+(mngEdit===u
+      ?'<input type="text" class="mng-in" value="'+esc(u)+'"><button type="button" class="ok" data-a="save">محفوظ کریں</button><button type="button" data-a="cancel">منسوخ</button>'
+      :'<span class="nm">'+esc(u)+'</span><button type="button" data-a="edit">✏️ Edit</button><button type="button" class="del" data-a="del">🗑 Delete</button>')+'</div>';
+  }).join('')||'<div class="hint" style="padding:12px">کوئی یونیورسٹی نہیں ملی۔</div>';
+  var inp=$('mngList').querySelector('.mng-in');if(inp){inp.focus();inp.select();}
+}
+function mngAction(btn){
+  var u=btn.parentNode.getAttribute('data-u'),a=btn.getAttribute('data-a');
+  if(a==='edit'){mngEdit=u;renderMng();}
+  else if(a==='cancel'){mngEdit='';renderMng();}
+  else if(a==='save'){if(renameUniv(u,btn.parentNode.querySelector('.mng-in').value)){mngEdit='';renderMng();}}
+  else if(a==='del'){if(deleteUniv(u))renderMng();}
+}
+function onDeptChange(){
+  var other=$('fDept').value==='__other__';
+  $('fDeptNew').classList.toggle('hidden-inline',!other);
+  if(other)$('fDeptNew').focus();
+  setCtx();
+}
+function commitDept(){
+  if($('fDept').value!=='__other__'||!ctx.u)return;
+  var name=resolveName(deptList(ctx.u),$('fDeptNew').value);
+  if(!name){$('fDept').value='';onDeptChange();return;}
+  if(deptList(ctx.u).indexOf(name)<0){(addD[ctx.u]=addD[ctx.u]||[]).push(name);saveStore();}
+  buildDeptOptions(ctx.u);$('fDept').value=name;setCtx();
+}
+function setCtx(){
+  var uv=$('fUniv').value;
+  ctx.u=(uv==='__new__')?'':uv;ctx.d=ctx.u?getDept():'';
+  var ready=!!(ctx.u&&ctx.d);
+  $('ctxMsg').style.display=ready?'none':'block';
+  document.querySelectorAll('#rowsBody tr').forEach(function(tr){
+    tr.querySelector('.rUniv').textContent=ctx.u||'—';
+    tr.querySelector('.rDept').textContent=ctx.d||'—';
+    tr.querySelector('.rSup').disabled=!ready;
+    tr.querySelector('.rDeg').disabled=!ready;
+    refreshSup(tr);
+  });
+}
+
+/* ---------- سپروائزر ---------- */
+function refreshSup(tr){
+  var sel=tr.querySelector('.rSup'),cur=sel.value,ready=!!(ctx.u&&ctx.d);
+  var list=ready?supList(ctx.u,ctx.d):[];
+  sel.innerHTML='<option value="">'+(ready?'— منتخب کریں —':'پہلے شعبہ منتخب کریں')+'</option>'+
+    list.map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+'</option>';}).join('')+
+    (ready?'<option value="__new__">➕ فہرست میں نہیں / نیا سپروائزر</option>':'');
+  if(cur==='__new__'&&ready)sel.value='__new__';
+  else if(list.indexOf(cur)>=0)sel.value=cur;
+  else{sel.value='';tr.querySelector('.newsup').classList.add('hidden-inline');}
+}
+function onSupChange(tr){
+  var isNew=tr.querySelector('.rSup').value==='__new__',box=tr.querySelector('.newsup'),inp=tr.querySelector('.rSupNew');
+  box.classList.toggle('hidden-inline',!isNew);
+  if(isNew)inp.focus();else{inp.value='';tr.querySelector('.supprev').textContent='';}
+}
+function commitSup(tr){
+  var sel=tr.querySelector('.rSup');
+  if(sel.value!=='__new__')return;
+  var inp=tr.querySelector('.rSupNew'),name=resolveSup(inp.value);
+  if(!name){sel.value='';onSupChange(tr);return;}
+  if(supList(ctx.u,ctx.d).indexOf(name)<0){
+    var key=ctx.u+'\u0001'+ctx.d;(extras[key]=extras[key]||[]).push(name);saveStore();
+  }
+  document.querySelectorAll('#rowsBody tr').forEach(refreshSup);
+  sel.value=name;onSupChange(tr);
+}
+
+/* ---------- قطاریں ---------- */
+function addRow(){
+  rowSeq++;
+  var ready=!!(ctx.u&&ctx.d);
+  var prev=$('rowsBody').lastElementChild,pSup='',pDeg='';
+  if(prev){pSup=prev.querySelector('.rSup').value;pDeg=prev.querySelector('.rDeg').value;if(pSup==='__new__')pSup='';}
+  var tr=document.createElement('tr');tr.dataset.rid=rowSeq;
+  tr.innerHTML=
+    '<td class="rownum" data-rn></td>'+
+    '<td data-l="سکالر کا نام"><input type="text" class="rScholar" placeholder="سکالر کا نام" autocomplete="off"></td>'+
+    '<td data-l="مقالے کا عنوان"><input type="text" class="rTitle" placeholder="مقالے کا مکمل عنوان" autocomplete="off"></td>'+
+    '<td data-l="سپروائزر"><select class="rSup"></select>'+
+      '<div class="newsup hidden-inline"><input type="text" class="rSupNew" placeholder="نیا سپروائزر — پورا نام" autocomplete="off"><div class="yr-prev supprev" style="direction:rtl;text-align:right"></div></div></td>'+
+    '<td data-l="شعبہ" class="ro rDept">—</td>'+
+    '<td data-l="یونیورسٹی" class="ro rUniv">—</td>'+
+    '<td data-l="ڈگری" class="deg-cell"><select class="rDeg"></select></td>'+
+    '<td data-l="سال" class="yr-cell"><input type="text" class="rYear" dir="ltr" placeholder="مثلاً 2018-2022" autocomplete="off"><div class="yr-prev"></div></td>'+
+    '<td class="rm-cell"><button type="button" class="rm-btn" title="حذف کریں">✕</button></td>';
+  $('rowsBody').appendChild(tr);
+  tr.querySelector('.rDeg').innerHTML='<option value="">— منتخب کریں —</option>'+DEGREES.map(function(g){return '<option value="'+esc(g)+'">'+esc(g)+'</option>';}).join('');
+  tr.querySelector('.rUniv').textContent=ctx.u||'—';
+  tr.querySelector('.rDept').textContent=ctx.d||'—';
+  tr.querySelector('.rSup').disabled=!ready;tr.querySelector('.rDeg').disabled=!ready;
+  refreshSup(tr);
+  if(ready){
+    if(pSup&&tr.querySelector('.rSup').querySelector('option[value="'+pSup.replace(/"/g,'\\"')+'"]'))tr.querySelector('.rSup').value=pSup;
+    if(pDeg)tr.querySelector('.rDeg').value=pDeg;
+  }
+  tr.querySelector('.rSup').addEventListener('change',function(){onSupChange(tr);});
+  var ni=tr.querySelector('.rSupNew');
+  ni.addEventListener('input',function(){
+    var r=resolveSup(this.value),p=tr.querySelector('.supprev');
+    p.textContent=r?('→ '+r+(supList(ctx.u,ctx.d).indexOf(r)>=0?'  ✓ فہرست میں موجود':'')):'';
+  });
+  ni.addEventListener('blur',function(){commitSup(tr);});
+  ni.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();this.blur();}});
+  tr.querySelector('.rYear').addEventListener('input',function(){
+    var res=normYear(this.value),p=this.parentNode.querySelector('.yr-prev');
+    if(!this.value.trim()){p.textContent='';return;}
+    p.textContent='→ '+res.clean;p.className='yr-prev'+(res.ok?'':' bad');
+  });
+  tr.querySelector('.rm-btn').addEventListener('click',function(){tr.remove();renumberRows();});
+  renumberRows();
+}
+function renumberRows(){
+  document.querySelectorAll('#rowsBody tr').forEach(function(r,i){r.querySelector('[data-rn]').textContent=(i+1);});
+}
+
+/* ---------- تصدیق اور محفوظ کاری ---------- */
+function validate(){
+  var errs=[],any=false,rowErr=false;
+  document.querySelectorAll('#rowsBody tr').forEach(function(r){
+    var sc=r.querySelector('.rScholar').value.trim(),ti=r.querySelector('.rTitle').value.trim(),yr=r.querySelector('.rYear').value.trim();
+    if(!(sc||ti||yr))return;
+    any=true;
+    var sv=r.querySelector('.rSup').value,dg=r.querySelector('.rDeg').value;
+    if(!sc||!ti||!yr||!sv||sv==='__new__'||!dg)rowErr=true;
+  });
+  if(any||!carry.length){
+    if(!ctx.u)errs.push('یونیورسٹی منتخب کریں');
+    if(ctx.u&&!ctx.d)errs.push('شعبہ منتخب کریں یا نیا شعبہ لکھیں');
+  }
+  if(!any&&!carry.length)errs.push('کم از کم ایک سکالر کی تفصیل درج کریں');
+  if(rowErr)errs.push('ہر سکالر کی قطار میں نام، عنوان، سپروائزر، ڈگری اور سال — سب مکمل ہونے چاہئیں');
+  return errs;
+}
+function collectRecords(){
+  var recs=[];
+  document.querySelectorAll('#rowsBody tr').forEach(function(r){
+    var sc=sp(r.querySelector('.rScholar').value),ti=sp(r.querySelector('.rTitle').value),yr=r.querySelector('.rYear').value.trim();
+    if(!sc&&!ti&&!yr)return;
+    recs.push({title:ti,scholar:sc,supervisor:sp(r.querySelector('.rSup').value),university:sp(ctx.u),dept:sp(ctx.d),degree:sp(r.querySelector('.rDeg').value),year:normYear(yr).clean});
+  });
+  return recs.concat(carry);
+}
+/* اپ لوڈ شدہ ریکارڈ کی Normalization (نئے نام فہرست میں بھی شامل ہو جاتے ہیں) */
+function normRecord(r){
+  r=r||{};
+  var ru=r.university||r.univ||'';
+  for(var rk in ren){if(ren.hasOwnProperty(rk)&&nkey(rk)===nkey(ru)){ru=ren[rk];break;}}
+  var u=resolveName(univList(),ru);
+  if(u&&univList().indexOf(u)<0)addU.push(u);
+  var d=resolveName(deptList(u),r.dept||r.department||'');
+  if(u&&d&&deptList(u).indexOf(d)<0)(addD[u]=addD[u]||[]).push(d);
+  var keep=ctx;ctx={u:u,d:d};
+  var sv=(u&&d&&(r.supervisor||'').toString().trim())?resolveSup(r.supervisor):normSup(r.supervisor||'');
+  if(u&&d&&sv&&supList(u,d).indexOf(sv)<0){var k=u+'\u0001'+d;(extras[k]=extras[k]||[]).push(sv);}
+  ctx=keep;
+  var dg=sp(r.degree||''),dl=dg.toLowerCase();
+  for(var i=0;i<DEGREES.length;i++){if(DEGREES[i].toLowerCase()===dl){dg=DEGREES[i];break;}}
+  return {title:sp(r.title),scholar:sp(r.scholar),supervisor:sv,university:u,dept:d,degree:dg,year:normYear(r.year).clean};
+}
+function showCarry(){
+  var m=$('carryMsg');
+  if(!carry.length){m.style.display='none';m.innerHTML='';return;}
+  m.style.display='block';
+  m.innerHTML='📂 اپ لوڈ شدہ '+carry.length+' اندراجات (Normalized) ڈاؤن لوڈ فائل میں شامل ہوں گے۔ <button type="button" id="carryClear">ہٹائیں</button>';
+  $('carryClear').addEventListener('click',function(){carry=[];showCarry();});
+}
+function importFile(file){
+  var fr=new FileReader();
+  fr.onload=function(){
+    var data;
+    try{data=JSON.parse(fr.result);}catch(e){alert('فائل درست JSON نہیں ہے۔');return;}
+    var arr=Array.isArray(data)?data:(data&&(data.records||data.data||data.theses))||[];
+    var recs=arr.map(normRecord).filter(function(r){return r.scholar||r.title;});
+    if(!recs.length){alert('فائل میں کوئی قابلِ استعمال اندراج نہیں ملا۔');return;}
+    carry=carry.concat(recs);saveStore();
+    buildUnivOptions();setCtx();showCarry();
+  };
+  fr.readAsText(file,'utf-8');
+}
+function slug(s){return (s||'').toString().split('/')[0].trim().replace(/[^\w\u0600-\u06FF]+/g,'-').replace(/^-+|-+$/g,'').slice(0,30)||'Data';}
+
+document.addEventListener('DOMContentLoaded',function(){
+  loadStore();buildUnivOptions();
+  for(var i=0;i<3;i++)addRow();
+  $('fUniv').addEventListener('change',onUnivChange);
+  $('fDept').addEventListener('change',onDeptChange);
+  $('fUnivNew').addEventListener('blur',commitUniv);
+  $('fUnivNew').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();this.blur();}});
+  $('fDeptNew').addEventListener('blur',commitDept);
+  $('fDeptNew').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();this.blur();}});
+  document.addEventListener('keydown',function(e){if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a')){e.preventDefault();openAdmin();}});
+  var taps=0,tapT=0;
+  document.querySelector('.mark').addEventListener('click',function(){var n=Date.now();taps=(n-tapT<1500)?taps+1:1;tapT=n;if(taps>=5){taps=0;openAdmin();}});
+  $('admClose').addEventListener('click',closeAdmin);
+  $('admGo').addEventListener('click',admLogin);
+  $('admPw').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();admLogin();}});
+  $('admExtract').addEventListener('click',function(){$('admFiles').click();});
+  $('admFiles').addEventListener('change',function(){if(this.files.length)extractFiles(this.files);this.value='';});
+  $('admDb').addEventListener('click',function(){$('admFile').click();});
+  $('admFile').addEventListener('change',function(){if(this.files[0])readDbFile(this.files[0]);this.value='';});
+  $('admDbDel').addEventListener('click',deleteDb);
+  $('admMng').addEventListener('click',openMng);
+  $('admExport').addEventListener('click',exportLists);
+  $('admChPw').addEventListener('click',function(){
+    var v=$('admNewPw').value;if(v.length<6){$('admMsg').textContent='⚠ پاس ورڈ کم از کم 6 حروف کا ہو۔';return;}
+    try{localStorage.setItem('SM_ADMIN_H',pwHash(v));$('admMsg').textContent='✔ پاس ورڈ تبدیل ہو گیا (صرف اسی براؤزر کے لیے)۔';}catch(e){$('admMsg').textContent='⚠ پاس ورڈ محفوظ نہیں ہو سکا۔';}
+    $('admNewPw').value='';
+  });
+  $('admReset').addEventListener('click',function(){
+    if(!confirm('اس براؤزر میں شامل، Edit یا Delete کی گئی تمام فہرستی تبدیلیاں صاف ہو جائیں گی۔ جاری رکھیں؟'))return;
+    resetLocalLists();refreshAll();$('admMsg').textContent='✔ تبدیلیاں صاف ہو گئیں۔';
+  });
+  $('mngClose').addEventListener('click',function(){$('mngOv').classList.remove('open');});
+  $('admOv').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+  $('mngOv').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+  $('mngSearch').addEventListener('input',renderMng);
+  $('mngList').addEventListener('click',function(e){var b=e.target.closest('button');if(b)mngAction(b);});
+  $('mngList').addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&e.target.classList.contains('mng-in')){e.preventDefault();var b=e.target.parentNode.querySelector('[data-a=save]');if(b)mngAction(b);}
+    if(e.key==='Escape'){mngEdit='';renderMng();}
+  });
+  $('importBtn').addEventListener('click',function(){$('importFile').click();});
+  $('importFile').addEventListener('change',function(){if(this.files[0])importFile(this.files[0]);this.value='';});
+  $('addRowBtn').addEventListener('click',addRow);
+
+  $('supForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    commitUniv();commitDept();
+    document.querySelectorAll('#rowsBody tr').forEach(commitSup);
+    var errs=validate(),errEl=$('formErr');
+    if(errs.length){errEl.style.display='block';errEl.textContent='⚠ '+errs.join(' • ');return;}
+    errEl.style.display='none';
+
+    var recs=collectRecords(),university=recs[0].university;
+    var sups=[];recs.forEach(function(r){if(sups.indexOf(r.supervisor)<0)sups.push(r.supervisor);});
+    var supLabel=sups.length===1?sups[0]:sups[0]+' +'+(sups.length-1);
+    var dateStr=new Date().toISOString().slice(0,10);
+    var fname='SM-Data_'+slug(university)+'_'+slug(sups[0])+'_'+dateStr+'.json';
+
+    var blob=new Blob([JSON.stringify(recs,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download=fname;document.body.appendChild(a);a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},4000);
+
+    var subjRaw='SM Data Submission ('+recs.length+' records)';
+    var bodyRaw='Assalam-o-Alaikum,\r\n\r\nPlease find the attached file: '+fname+'\r\nRecords: '+recs.length+'\r\n\r\n(Attach the downloaded file before sending, and send from your official university/institutional email.)\r\n\r\nJazak Allah.';
+    var subject=encodeURIComponent(subjRaw),body=encodeURIComponent(bodyRaw);
+    $('mailBtn').href='mailto:'+ADMIN_EMAIL+'?subject='+subject+'&body='+body;
+    $('mailAddr').textContent=ADMIN_EMAIL;
+    $('fnameMsg').textContent='📄 '+fname;
+
+    $('formShell').classList.add('hidden');
+    $('successView').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  $('copyMail').addEventListener('click',function(){
+    var btn=this,done=function(){btn.textContent='✔ کاپی ہو گیا';setTimeout(function(){btn.textContent='📋 کاپی';},2000);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ADMIN_EMAIL).then(done,function(){fallbackCopy();done();});}
+    else{fallbackCopy();done();}
+    function fallbackCopy(){var t=document.createElement('textarea');t.value=ADMIN_EMAIL;document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);}
+  });
+  $('againBtn').addEventListener('click',function(){
+    $('supForm').reset();
+    $('rowsBody').innerHTML='';rowSeq=0;carry=[];showCarry();
+    onUnivChange();
+    for(var i=0;i<3;i++)addRow();
+    $('successView').style.display='none';
+    $('formShell').classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
